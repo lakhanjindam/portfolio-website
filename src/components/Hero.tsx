@@ -11,12 +11,13 @@ const Hero = () => {
       <TerminalWindow />
       <BorderAnimation />
       
-      <div className="relative z-10 max-w-6xl mx-auto w-full">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="relative z-10 max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
+            className="text-center lg:text-left"
           >
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -25,11 +26,11 @@ const Hero = () => {
               className="space-y-4"
             >
               <p className="text-emerald-400 font-medium tracking-wide">Hi, I'm Lakhan Jindam 👋</p>
-              <h1 className="font-grotesk text-5xl md:text-6xl font-bold space-y-3">
+              <h1 className="font-grotesk text-4xl sm:text-5xl md:text-6xl font-bold space-y-2 sm:space-y-3">
                 <span className="block">Senior</span>
                 <span className="block text-gradient">Software Engineer</span>
               </h1>
-              <p className="text-lg text-gray-400 max-w-lg">
+              <p className="text-base sm:text-lg text-gray-400 max-w-lg mx-auto lg:mx-0">
                 Specialized in building scalable microservices and distributed systems. 
                 Currently working on cloud-native applications at 
                 <motion.span 
@@ -69,7 +70,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="flex flex-col sm:flex-row gap-4 mt-8"
+              className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mt-8"
             >
               <Button href="#projects" variant="primary" className="group">
                 <span>View My Work</span>
@@ -84,7 +85,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
-              className="flex items-center gap-6 mt-8"
+              className="flex items-center justify-center lg:justify-start gap-6 mt-8"
             >
               <a href="https://github.com" className="text-gray-400 hover:text-emerald-400 transition-colors">
                 <Github className="w-6 h-6" />
@@ -101,9 +102,9 @@ const Hero = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="relative hidden lg:block"
+            className="relative lg:block"
           >
-            <div className="relative">
+            <div className="relative max-w-sm mx-auto lg:max-w-none">
               <motion.div
                 animate={{ 
                   y: [0, -10, 0],

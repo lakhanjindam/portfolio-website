@@ -38,17 +38,17 @@ const Timeline: React.FC = () => {
   });
 
   return (
-    <section className="py-20 bg-gray-900/50 backdrop-blur-sm" id="experience">
-      <div className="max-w-6xl mx-auto px-4" ref={containerRef}>
+    <section className="py-12 sm:py-20 bg-gray-900/50 backdrop-blur-sm" id="experience">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" ref={containerRef}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-3xl font-bold text-white mb-4">Experience</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">Experience</h2>
+          <p className="text-sm sm:text-base text-gray-400 max-w-2xl mx-auto">
             My professional journey and growth in the tech industry
           </p>
         </motion.div>

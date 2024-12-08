@@ -36,19 +36,19 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
   );
 
   return (
-    <div className="relative py-16">
+    <div className="relative py-8 sm:py-16">
       {/* Center container for the dot */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+      <div className="absolute left-0 sm:left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 sm:-translate-x-1/2 z-10">
         <TimelineDot progress={itemProgress} index={index} isEven={isEven} />
       </div>
       
-      <div className="grid md:grid-cols-[1fr_100px_1fr] items-center">
+      <div className="grid grid-cols-[1fr] sm:grid-cols-[1fr_100px_1fr] items-center pl-8 sm:pl-0">
         <motion.div
           className={cn(
-            "space-y-2 px-8",
-            !isEven && "md:col-start-3",
+            "space-y-2 sm:px-8",
+            !isEven && "sm:col-start-3",
             "bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-gray-700/50",
-            isEven ? "md:text-right" : "md:text-left"
+            isEven ? "sm:text-right" : "sm:text-left"
           )}
           initial={{ opacity: 0, x: isEven ? -50 : 50 }}
           style={{
@@ -57,15 +57,15 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
           }}
           transition={{ duration: 0.4, ease: "easeOut" }}
         >
-          <span className="text-emerald-400 font-medium block">{year}</span>
-          <h3 className="text-xl font-bold text-white">{title}</h3>
-          <p className="text-emerald-400/80 font-medium">{company}</p>
-          <p className="text-gray-400">{description}</p>
+          <span className="text-emerald-400 font-medium block text-sm sm:text-base">{year}</span>
+          <h3 className="text-lg sm:text-xl font-bold text-white">{title}</h3>
+          <p className="text-emerald-400/80 font-medium text-sm sm:text-base">{company}</p>
+          <p className="text-gray-400 text-sm sm:text-base">{description}</p>
         </motion.div>
         
-        <div className="w-full h-full" />
+        <div className="w-full h-full hidden sm:block" />
         
-        {isEven && <div />}
+        {isEven && <div className="hidden sm:block" />}
       </div>
     </div>
   );

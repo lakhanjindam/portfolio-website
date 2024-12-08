@@ -9,7 +9,7 @@ const TimelineLine: React.FC<TimelineLineProps> = ({ progress }) => {
   const scaleY = useTransform(progress, [0, 1], [0, 1]);
 
   return (
-    <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-px">
+    <div className="absolute left-0 sm:left-1/2 top-0 bottom-0 -translate-x-1/2 sm:-translate-x-1/2 w-px z-0">
       <div className="h-full w-full bg-gray-700/50" />
       <motion.div 
         style={{
