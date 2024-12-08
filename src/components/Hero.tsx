@@ -24,14 +24,44 @@ const Hero = () => {
               transition={{ delay: 0.2, duration: 0.8 }}
               className="space-y-4"
             >
-              <p className="text-emerald-400 font-medium tracking-wide">Hi, I'm John Doe 👋</p>
+              <p className="text-emerald-400 font-medium tracking-wide">Hi, I'm Lakhan Jindam 👋</p>
               <h1 className="font-grotesk text-5xl md:text-6xl font-bold space-y-3">
-                <span className="block">Backend</span>
-                <span className="block text-gradient">Engineer</span>
+                <span className="block">Senior</span>
+                <span className="block text-gradient">Software Engineer</span>
               </h1>
               <p className="text-lg text-gray-400 max-w-lg">
                 Specialized in building scalable microservices and distributed systems. 
-                Currently working on cloud-native applications at <span className="text-emerald-400">TechCorp</span>.
+                Currently working on cloud-native applications at 
+                <motion.span 
+                  className="relative inline-block ml-1 group"
+                >
+                  <span className="text-emerald-400">Twilio</span>
+                  <motion.div
+                    className="absolute bottom-0 left-0 w-full h-[2px] origin-left"
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ 
+                      scaleX: 1,
+                      transition: { 
+                        duration: 4, 
+                        ease: "easeInOut" 
+                      }
+                    }}
+                    animate={{
+                      backgroundPosition: ['0% 50%', '100% 50%'],
+                    }}
+                    transition={{
+                      backgroundPosition: {
+                        repeat: Infinity,
+                        duration: 3,
+                        ease: "linear"
+                      }
+                    }}
+                    style={{
+                      background: 'linear-gradient(to right, #34d399, #3b82f6, #34d399)',
+                      backgroundSize: '200% 100%'
+                    }}
+                  />
+                </motion.span>.
               </p>
             </motion.div>
 
@@ -62,8 +92,8 @@ const Hero = () => {
               <a href="https://linkedin.com" className="text-gray-400 hover:text-emerald-400 transition-colors">
                 <Linkedin className="w-6 h-6" />
               </a>
-              <div className="h-4 w-px bg-gray-800"></div>
-              <p className="text-sm text-gray-400">Available for select projects</p>
+              {/* <div className="h-4 w-px bg-gray-800"></div>
+              <p className="text-sm text-gray-400">Available for select projects</p> */}
             </motion.div>
           </motion.div>
 
