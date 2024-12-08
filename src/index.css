@@ -1,0 +1,37 @@
+@import '@fontsource/space-grotesk/400.css';
+@import '@fontsource/space-grotesk/700.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-gray-900 font-sans;
+}
+
+.mask-gradient {
+  mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-blue-500 to-emerald-400 bg-300% animate-gradient;
+  }
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
