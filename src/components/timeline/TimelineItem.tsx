@@ -60,7 +60,14 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
           <span className="text-emerald-400 font-medium block text-sm sm:text-base">{duration}</span>
           <h3 className="text-lg sm:text-xl font-bold text-white">{title}</h3>
           <p className="text-emerald-400/80 font-medium text-sm sm:text-base">{company}</p>
-          <p className="text-gray-400 text-sm sm:text-base">{description}</p>
+          <ul className="text-gray-400 text-sm sm:text-base space-y-2">
+            {description.split('\n').map((line, idx) => (
+              <li key={idx} className="flex items-start gap-2 p-2 hover:bg-gray-800 transition-colors">
+                <span className="text-emerald-400">➜</span>
+                <span>{line}</span>
+              </li>
+            ))}
+          </ul>
         </motion.div>
         
         <div className="w-full h-full hidden sm:block" />
