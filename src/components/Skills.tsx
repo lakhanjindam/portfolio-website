@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
-import { SkillCategory } from './skills/skillsCategory';
-import { skillsData } from './skills/skillsData';
+import SkillCategory from './skills/skillsCategory';
 
 const Skills = () => {
   return (
@@ -36,15 +35,8 @@ const Skills = () => {
             cloud infrastructure, and secure system design.
           </motion.p>
         </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {skillsData.map((category, index) => (
-            <SkillCategory
-              key={index}
-              index={index}
-              {...category}
-            />
-          ))}
+          <SkillCategory />
         </div>
       </div>
     </section>
