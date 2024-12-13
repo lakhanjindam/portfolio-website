@@ -1,9 +1,9 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Terminal, ArrowRight, Github, Linkedin } from 'lucide-react';
 import { BorderAnimation } from './BorderAnimation';
 import { Button } from './ui/Button';
 import { TerminalWindow } from './terminal/TerminalWindow';
+import { currentCompany, heroSectionDescription, heroSectionSkills } from '../data';
 
 const Hero = () => {
   return (
@@ -25,18 +25,30 @@ const Hero = () => {
               transition={{ delay: 0.2, duration: 0.8 }}
               className="space-y-4"
             >
-              <p className="text-emerald-400 font-medium tracking-wide">Hi, I'm Lakhan Jindam 👋</p>
-              <h1 className="font-grotesk text-4xl sm:text-5xl md:text-6xl font-bold space-y-2 sm:space-y-3">
+              <motion.p 
+                className="text-emerald-400 font-medium tracking-wide text-4xl"
+                initial={{ opacity: 0, y: 20 }} // Start slightly below and invisible
+                animate={{ opacity: 1, y: 0 }} // Fade in and move to normal position
+                transition={{ duration: 0.8, type: "spring", stiffness: 200 }} // Spring effect
+                whileHover={{ scale: 1.05 }} // Scale up slightly on hover
+              >
+                Hi, I'm Lakhan Jindam 👋
+              </motion.p>
+              <motion.h1 
+                className="font-grotesk text-5xl sm:text-6xl md:text-7xl font-bold space-y-2 sm:space-y-3"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1}}
+              >
                 <span className="block">Senior</span>
                 <span className="block text-gradient">Software Engineer</span>
-              </h1>
+              </motion.h1>
               <p className="text-base sm:text-lg text-gray-400 max-w-lg mx-auto lg:mx-0">
-                Specialized in building scalable microservices and distributed systems. 
-                Currently working on cloud-native applications at 
+                {heroSectionDescription}
                 <motion.span 
                   className="relative inline-block ml-1 group"
                 >
-                  <span className="text-emerald-400">Twilio</span>
+                  <span className="text-emerald-400">{currentCompany}</span>
                   <motion.div
                     className="absolute bottom-0 left-0 w-full h-[2px] origin-left"
                     initial={{ scaleX: 0 }}
@@ -119,18 +131,12 @@ const Hero = () => {
               >
                 <Terminal className="w-16 h-16 text-emerald-400 mb-6" />
                 <div className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-emerald-400"></div>
-                    <span className="text-sm text-gray-300">Microservices Architecture</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-blue-400"></div>
-                    <span className="text-sm text-gray-300">Cloud Infrastructure</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-purple-400"></div>
-                    <span className="text-sm text-gray-300">System Design</span>
-                  </div>
+                  {heroSectionSkills.map(({ color, name }, index) => (
+                    <div key={index} className="flex items-center gap-2">
+                      <div className={`w-2 h-2 rounded-full bg-${color}`}></div>
+                      <span className="text-sm text-gray-300">{name}</span>
+                    </div>
+                  ))}
                 </div>
               </motion.div>
             </div>

@@ -4,7 +4,7 @@ import TimelineDot from './TimelineDot';
 import { cn } from '../../utils/cn';
 
 interface TimelineItemProps {
-  year: string;
+  duration: string;
   title: string;
   company: string;
   description: string;
@@ -14,7 +14,7 @@ interface TimelineItemProps {
 }
 
 const TimelineItem: React.FC<TimelineItemProps> = ({ 
-  year, 
+  duration, 
   title, 
   company, 
   description, 
@@ -57,7 +57,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
           }}
           transition={{ duration: 0.4, ease: "easeOut" }}
         >
-          <span className="text-emerald-400 font-medium block text-sm sm:text-base">{year}</span>
+          <span className="text-emerald-400 font-medium block text-sm sm:text-base">{duration}</span>
           <h3 className="text-lg sm:text-xl font-bold text-white">{title}</h3>
           <p className="text-emerald-400/80 font-medium text-sm sm:text-base">{company}</p>
           <p className="text-gray-400 text-sm sm:text-base">{description}</p>

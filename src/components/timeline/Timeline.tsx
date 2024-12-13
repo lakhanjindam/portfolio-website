@@ -1,34 +1,35 @@
 import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
 import TimelineItem from './TimelineItem';
 import TimelineLine from './TimelineLine'; // Assuming TimelineLine is a separate component
+import { experiences } from '../../data';
 
-const experiences = [
-  {
-    year: '2023 - Present',
-    title: 'Senior Backend Engineer',
-    company: 'TechCorp',
-    description: 'Leading the development of microservices architecture and implementing cloud-native solutions.',
-  },
-  {
-    year: '2021 - 2023',
-    title: 'Backend Engineer',
-    company: 'InnovateTech',
-    description: 'Developed and maintained scalable APIs serving millions of requests daily.',
-  },
-  {
-    year: '2019 - 2021',
-    title: 'Software Developer',
-    company: 'StartupX',
-    description: 'Built and deployed full-stack applications using modern technologies.',
-  },
-  {
-    year: '2018 - 2019',
-    title: 'Junior Developer',
-    company: 'CodeCraft',
-    description: 'Contributed to various web development projects and learned industry best practices.',
-  },
-];
+// const experiences = [
+//   {
+//     year: '2023 - Present',
+//     title: 'Senior Backend Engineer',
+//     company: 'TechCorp',
+//     description: 'Leading the development of microservices architecture and implementing cloud-native solutions.',
+//   },
+//   {
+//     year: '2021 - 2023',
+//     title: 'Backend Engineer',
+//     company: 'InnovateTech',
+//     description: 'Developed and maintained scalable APIs serving millions of requests daily.',
+//   },
+//   {
+//     year: '2019 - 2021',
+//     title: 'Software Developer',
+//     company: 'StartupX',
+//     description: 'Built and deployed full-stack applications using modern technologies.',
+//   },
+//   {
+//     year: '2018 - 2019',
+//     title: 'Junior Developer',
+//     company: 'CodeCraft',
+//     description: 'Contributed to various web development projects and learned industry best practices.',
+//   },
+// ];
 
 const Timeline: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -58,7 +59,7 @@ const Timeline: React.FC = () => {
           <div className="relative">
             {experiences.map((experience, index) => (
               <TimelineItem
-                key={experience.year}
+                key={experience.duration}
                 {...experience}
                 index={index}
                 progress={scrollYProgress}

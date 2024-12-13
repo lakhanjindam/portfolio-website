@@ -1,30 +1,6 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Github, ExternalLink } from 'lucide-react';
-
-const projects = [
-  {
-    title: 'Scalable Microservices Architecture',
-    description: 'Designed and implemented a high-performance microservices system handling 1M+ daily requests',
-    tech: ['Node.js', 'Docker', 'Kubernetes', 'MongoDB'],
-    github: '#',
-    live: '#'
-  },
-  {
-    title: 'Real-time Data Processing Pipeline',
-    description: 'Built a robust data pipeline processing 500GB+ daily with fault tolerance and monitoring',
-    tech: ['Python', 'Apache Kafka', 'ELK Stack', 'AWS'],
-    github: '#',
-    live: '#'
-  },
-  {
-    title: 'Authentication Service',
-    description: 'Developed a secure authentication system with OAuth2.0 and JWT implementation',
-    tech: ['Java', 'Spring Boot', 'PostgreSQL', 'Redis'],
-    github: '#',
-    live: '#'
-  }
-];
+import { projects } from '../data';
 
 const Projects = () => {
   return (
