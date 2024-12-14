@@ -7,6 +7,7 @@ import { currentCompany, heroSectionDescription, heroSectionSkills } from '../da
 import './Hero.css'; // Import the CSS file for animations
 import { useEffect } from 'react';
 import HighlightedText from './HighlightedText';
+import CreativeTextAnimation from './creativeTextAnimation';
 
 const Hero = () => {
   useEffect(() => {
@@ -22,7 +23,7 @@ const Hero = () => {
       <BorderAnimation />
       
       <div className="relative z-10 max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div className="pt-16 lg:pt-0 grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -35,16 +36,10 @@ const Hero = () => {
               transition={{ delay: 0.2, duration: 0.8 }}
               className="space-y-4"
             >
-              <motion.p 
-                className="text-emerald-400 font-medium tracking-wide text-4xl"
-                initial={{ opacity: 0, y: 20 }} // Start slightly below and invisible
-                animate={{ opacity: 1, y: 0 }} // Fade in and move to normal position
-                transition={{ duration: 0.8, type: "spring", stiffness: 200 }} // Spring effect
-                whileHover={{ scale: 1.05 }} // Scale up slightly on hover
-              >
-                Hi, I'm Lakhan Jindam 👋
-              </motion.p>
-              <motion.h1 
+              <p>
+                <CreativeTextAnimation />
+              </p>
+              <motion.h1
                 className="font-grotesk text-5xl sm:text-6xl md:text-7xl font-bold space-y-2 sm:space-y-3"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}

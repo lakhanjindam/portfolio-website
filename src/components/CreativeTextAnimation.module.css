@@ -1,0 +1,79 @@
+@keyframes displayText {
+    0% {
+      display: inline-block;
+    }
+    25%, 100% {
+      display: none;
+    }
+  }
+  
+  @keyframes animate {
+    0%, 10%, 100% {
+      width: 0;
+    }
+    70%, 90% {
+      width: 100%;
+    }
+  }
+  
+  @keyframes animateText {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+  
+  .creativeText {
+    --primary-color: #01fe87;
+    --text-color: #ffffff;
+    --text-color-transparent: rgba(255, 255, 255, 0.1);
+    --gradient-color-1: #ff8c00;
+    --gradient-color-2: #ffd700;
+    --gradient-color-3: #00b33c;
+    --gradient-color-4: #00ffc7;
+  
+    display: inline-flex;
+    align-items: center;
+    font-style: italic;
+    font-size: 2em;
+    font-family: 'Monospace';
+    font-weight: 600;
+    gap: 0.3em; /* Add space between elements */
+    padding-right: 150px; /* Shift it to left for better alignment with hero section */
+    color: white;
+  }
+  
+  .creativeText span {
+    position: relative;
+    color: white; /* Change from var(--text-color-transparent) to black */
+    animation: displayText 12s infinite;
+  }
+
+  
+  .creativeText span::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0; /* Start with 0 width */
+    height: 100%;
+    overflow: hidden;
+    background: linear-gradient(
+      to right,
+      var(--gradient-color-1) 20%,
+      var(--gradient-color-2) 30%,
+      var(--gradient-color-3) 70%,
+      var(--gradient-color-4) 80%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 500% auto;
+    border-right: 2px solid var(--gradient-color-1);
+    color: transparent;
+    animation: animate 3s linear infinite, animateText 4s ease-in-out infinite alternate;
+  }
+  
+  
