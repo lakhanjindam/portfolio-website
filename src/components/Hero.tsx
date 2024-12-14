@@ -75,10 +75,10 @@ const Hero = () => {
               transition={{ delay: 0.6 }}
               className="flex items-center justify-center lg:justify-start gap-6 mt-8"
             >
-              <a href="https://github.com" className="text-gray-400 hover:text-emerald-400 transition-colors">
+              <a href="https://github.com/lakhanjindam" className="text-gray-400 hover:text-emerald-400 transition-colors">
                 <Github className="w-6 h-6" />
               </a>
-              <a href="https://linkedin.com" className="text-gray-400 hover:text-emerald-400 transition-colors">
+              <a href="https://linkedin.com/in/lakhan-jindam" className="text-gray-400 hover:text-emerald-400 transition-colors">
                 <Linkedin className="w-6 h-6" />
               </a>              
             </motion.div>

@@ -38,7 +38,7 @@
     align-items: center;
     font-style: italic;
     font-size: 2em;
-    font-family: 'Monospace';
+    font-family:'Monospace';
     font-weight: 600;
     gap: 0.3em; /* Add space between elements */
     max-width: 100%; /* Ensure it doesn't overflow its parent */

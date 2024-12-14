@@ -6,21 +6,36 @@ import { ArrowUp } from 'lucide-react'
 
 export default function ScrollToTop() {
   const [scrollProgress, setScrollProgress] = useState(0)
+  const [isVisible, setIsVisible] = useState(true)
+  let timer: number;
   const controls = useAnimation()
-
+  
+  
   useEffect(() => {
     const handleScroll = () => {
-      const totalScroll = document.documentElement.scrollHeight - window.innerHeight
       const currentScroll = window.scrollY
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight
       const progress = Math.min(currentScroll / totalScroll, 1)
       setScrollProgress(progress)
+      setIsVisible(true);
+      if (timer) {
+        clearTimeout(timer);
+      }
+      timer = setTimeout(() => {
+        setIsVisible(false);
+      }, 5000);
     }
 
     window.addEventListener("scroll", handleScroll)
     // Initial check
     handleScroll()
 
-    return () => window.removeEventListener("scroll", handleScroll)
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      if (timer) {
+        clearTimeout(timer);
+      }
+    }
   }, [])
 
   useEffect(() => {
@@ -42,7 +57,7 @@ export default function ScrollToTop() {
       className="fixed bottom-8 right-8 p-2 bg-transparent rounded-full shadow-lg focus:outline-none z-50"
       onClick={scrollToTop}
       initial={{ opacity: 0, scale: 0.5 }}
-      animate={{ opacity: scrollProgress > 0 ? 1 : 0, scale: scrollProgress > 0 ? 1 : 0.5 }}
+      animate={{ opacity: isVisible && scrollProgress > 0 ? 1 : 0, scale: isVisible && scrollProgress > 0 ? 1 : 0.5 }}
       exit={{ opacity: 0, scale: 0.5 }}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
@@ -75,4 +90,3 @@ export default function ScrollToTop() {
     </motion.button>
   )
 }
-
