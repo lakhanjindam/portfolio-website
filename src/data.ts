@@ -8,9 +8,10 @@ import {
   Shield,
   Terminal,
   Lock,
-  LucideIcon
+  LucideIcon,
+  Code
 } from 'lucide-react';
-import { SkillCategory } from './types';
+import { Certification, SkillCategory } from './types';
 
 // Interfaces for experience
 interface Experience {
@@ -129,39 +130,39 @@ const skillsData: SkillCategory[] = [
       title: 'Databases & Storage',
       skills: [
       { name: 'PostgreSQL', grade: 'A' },
-      { name: 'MongoDB', grade: 'A' },
+      { name: 'MySQL', grade: 'A' },
+      { name: 'MongoDB', grade: 'B' },
       { name: 'Redis', grade: 'B' },
-      { name: 'Elasticsearch', grade: 'B' },
       ],
   },
   {
-      icon: Server,
+      icon: Code,
       title: 'Backend Development',
       skills: [
-      { name: 'Node.js', grade: 'A' },
+      { name: 'Golang', grade: 'A' },
       { name: 'Python', grade: 'A' },
-      { name: 'Java Spring Boot', grade: 'B' },
-      { name: 'GraphQL', grade: 'B' },
+      {name: 'Ruby', grade: 'B' },
+      { name: 'Javascript', grade: 'B' },
       ],
   },
   {
       icon: Cloud,
       title: 'Cloud & DevOps',
       skills: [
-      { name: 'AWS', grade: 'A' },
+      { name: 'AWS', grade: 'B' },
       { name: 'Docker', grade: 'A' },
-      { name: 'Kubernetes', grade: 'B' },
-      { name: 'Terraform', grade: 'B' },
+      { name: 'Kubernetes', grade: 'A' },
+      { name: 'Terraform', grade: 'A' },
       ],
   },
   {
       icon: Network,
       title: 'System Architecture',
       skills: [
-      { name: 'Microservices', grade: 'A' },
-      { name: 'Event-Driven Design', grade: 'A' },
+      { name: 'Microservices', grade: 'B' },
+      { name: 'Event-Driven Design', grade: 'B' },
       { name: 'API Design', grade: 'A' },
-      { name: 'Distributed Systems', grade: 'B' },
+      { name: 'Distributed Systems', grade: 'A' },
       ],
   },
   {
@@ -179,45 +180,52 @@ const skillsData: SkillCategory[] = [
       title: 'Tools & Practices',
       skills: [
       { name: 'CI/CD', grade: 'A' },
+      {name: 'Git', grade: 'A' },
+      {name: 'GitOps', grade: 'A' },
       { name: 'Git Flow', grade: 'A' },
-      { name: 'Agile/Scrum', grade: 'A' },
+      { name: 'Agile/Scrum/Kanban', grade: 'A' },
       { name: 'TDD', grade: 'B' },
+      {name: 'Temporal.io', grade: 'A' },
       ],
   },
   ];
 
-const certifications = [
-  {
-    id: 'aws-sa',
-    name: 'AWS Certified Solutions Architect',
-    issuer: 'Amazon Web Services',
-    issueDate: '2023-06',
-    expiryDate: '2026-06',
-    credentialId: 'AWS-SA-12345',
-    credentialUrl: 'https://www.credly.com/badges/aws-sa',
-    logo: 'https://images.unsplash.com/photo-1614624532983-4ce03382d63d?auto=format&fit=crop&w=200&h=200',
-    featured: true
-  },
+const certifications: Certification[] = [
   {
     id: 'k8s-cka',
     name: 'Certified Kubernetes Administrator',
     issuer: 'Cloud Native Computing Foundation',
-    issueDate: '2023-03',
-    expiryDate: '2026-03',
-    credentialId: 'CKA-12345',
-    credentialUrl: 'https://www.credly.com/badges/cka',
+    issueDate: '2024-08',
+    expiryDate: '2027-08',
+    credentialId: 'LF-u23yc6zyq5',
+    credentialUrl: 'https://www.credly.com/badges/552a217c-f1eb-4878-8675-0ccd4dbf4b97/public_url',
     logo: 'https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?auto=format&fit=crop&w=200&h=200',
-    featured: true
+    featured: true,
+    iconColor: '#326CE5',
   },
   {
-    id: 'azure-dev',
-    name: 'Microsoft Azure Developer Associate',
-    issuer: 'Microsoft',
-    issueDate: '2023-01',
-    expiryDate: '2025-01',
-    credentialId: 'AZURE-12345',
-    credentialUrl: 'https://www.credly.com/badges/azure-dev',
-    logo: 'https://images.unsplash.com/photo-1633419461186-7d40a38105ec?auto=format&fit=crop&w=200&h=200'
+    id: 'k8s-ckad',
+    name: 'Certified Kubernetes Application Developer',
+    issuer: 'Cloud Native Computing Foundation',
+    issueDate: '2023-03',
+    expiryDate: '2026-03',
+    credentialId: 'LF-vbodhngh33',
+    credentialUrl: 'https://www.credly.com/badges/a0899223-376a-4628-ae47-e62d946f72b7/public_url',
+    logo: 'https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?auto=format&fit=crop&w=200&h=200',
+    featured: true,
+    iconColor: '#326CE5',
+  },
+  {
+    id: 'terraform-assoc',
+    name: 'Terraform Associate',
+    issuer: 'HashiCorp',
+    issueDate: '2023-05',
+    expiryDate: '2025-05',
+    credentialId: '',
+    credentialUrl: 'https://www.credly.com/badges/29b267cc-2f03-4d1b-a71a-f5a9994d6bc2/public_url',
+    logo: 'https://images.unsplash.com/photo-1614624532983-4ce03382d63d?auto=format&fit=crop&w=200&h=200',
+    featured: false,
+    iconColor: '#7A00E6',
   }
 ];
 // Export the data

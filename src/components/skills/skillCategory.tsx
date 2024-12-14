@@ -10,9 +10,6 @@ interface SkillCategoryProps {
   skills: Skill[];
   index: number;
 }
- 
-  
-
 
 export const CategoryItem: React.FC<SkillCategoryProps> = ({
   icon: Icon,

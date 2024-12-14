@@ -4,6 +4,9 @@ import { ExternalLink, Calendar, Award } from 'lucide-react';
 import { certifications } from '../../data';
 import { cn } from '../../utils/cn';
 import { ShineOverlay } from '../ui/shineOverlay';
+import { FaAws} from 'react-icons/fa';
+import { SiKubernetes, SiTerraform } from 'react-icons/si';
+import { VscAzure } from 'react-icons/vsc';
 
 interface CertificationCardProps {
   certification: typeof certifications[number];
@@ -48,11 +51,10 @@ export const CertificationCard: React.FC<CertificationCardProps> = ({
             }}
             transition={{ duration: 0.3 }}
           >
-            <img
-              src={certification.logo}
-              alt={certification.issuer}
-              className="w-full h-full object-cover"
-            />
+            {certification.id.includes('k8s') && <SiKubernetes size={40} color={certification.iconColor}/>}
+            {certification.id.includes('aws') && <FaAws size={40} color={certification.iconColor}/>}
+            {certification.id.includes('azure')  && <VscAzure size={40} color={certification.iconColor}/>}
+            {certification.id.includes('terraform')  && <SiTerraform size={40} color={certification.iconColor}/>}
             <div className="absolute inset-0 bg-gradient-to-br from-transparent to-gray-900/20" />
           </motion.div>
           <div className="flex-1">
@@ -75,7 +77,9 @@ export const CertificationCard: React.FC<CertificationCardProps> = ({
 
         {/* Credential ID and Link */}
         <div className="flex items-center justify-between">
-          <span className="text-sm text-gray-500">ID: {certification.credentialId}</span>
+          {certification.credentialId && (
+            <span className="text-sm text-gray-500">ID: {certification.credentialId}</span>
+          )}
           <motion.a
             href={certification.credentialUrl}
             target="_blank"
@@ -92,7 +96,7 @@ export const CertificationCard: React.FC<CertificationCardProps> = ({
         </div>
 
         {/* Background gradient effect */}
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        {/* <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" /> */}
       </div>
     </motion.div>
   );

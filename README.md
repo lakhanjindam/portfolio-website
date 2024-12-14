@@ -10,6 +10,8 @@ A sleek and modern portfolio website built with React, TypeScript, Tailwind CSS,
 - 🔧 Built with TypeScript for type safety
 - ⚡ Fast development with Vite
 - 🎯 Custom reusable components
+- 🏆 Certifications section to showcase your achievements
+- 💼 Skills section with detailed progress indicators
 
 ## Prerequisites
 
@@ -57,7 +59,8 @@ The built files will be in the `dist` directory.
 ```
 portfolio-site/
 ├── src/
-│   ├── components/     # Reusable UI components
+│   ├── components/     # Reusable UI components including Skills and Certifications
+│   ├── certifications/  # Components related to certifications
 │   ├── utils/         # Utility functions
 │   ├── assets/        # Static assets
 │   └── App.tsx        # Main application component
