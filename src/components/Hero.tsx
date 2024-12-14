@@ -34,23 +34,6 @@ const Hero = () => {
               transition={{ delay: 0.2, duration: 0.8 }}
               className="space-y-4"
             >
-              <svg
-                width="300"
-                height="100"
-                viewBox="0 0 300 100"
-                xmlns="http://www.w3.org/2000/svg"
-                className="handwriting"
-              >
-                <path
-                  d="M10 40 Q 52.5 10, 95 40 T 190 40"
-                  fill="transparent"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeDasharray="300"
-                  strokeDashoffset="300"
-                  className="svg-path"
-                />
-              </svg>
               <motion.p 
                 className="text-emerald-400 font-medium tracking-wide text-4xl"
                 initial={{ opacity: 0, y: 20 }} // Start slightly below and invisible
