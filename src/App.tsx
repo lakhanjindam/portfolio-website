@@ -4,6 +4,7 @@ import Timeline from './components/timeline/Timeline';
 import Contact from './components/Contact';
 import Certifications from './components/certifications/certifications';
 import Skills from './components/Skills';
+import ScrollToTop from './components/ScrollToTop';
 
 const App: React.FC = () => {
   return (
@@ -13,6 +14,7 @@ const App: React.FC = () => {
       <Skills />
       <Certifications />
       <Contact />
+      <ScrollToTop />
     </div>
   );
 };
