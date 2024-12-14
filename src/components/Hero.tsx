@@ -6,6 +6,7 @@ import { TerminalWindow } from './terminal/TerminalWindow';
 import { currentCompany, heroSectionDescription, heroSectionSkills } from '../data';
 import './Hero.css'; // Import the CSS file for animations
 import { useEffect } from 'react';
+import HighlightedText from './HighlightedText';
 
 const Hero = () => {
   useEffect(() => {
@@ -54,36 +55,7 @@ const Hero = () => {
               </motion.h1>
               <p className="text-base sm:text-lg text-gray-400 max-w-lg mx-auto lg:mx-0">
                 {heroSectionDescription}
-                <motion.span 
-                  className="relative inline-block ml-1 group"
-                >
-                  <span className="text-emerald-400">{currentCompany}</span>
-                  <motion.div
-                    className="absolute bottom-0 left-0 w-full h-[2px] origin-left"
-                    initial={{ scaleX: 0 }}
-                    whileInView={{ 
-                      scaleX: 1,
-                      transition: { 
-                        duration: 4, 
-                        ease: "easeInOut" 
-                      }
-                    }}
-                    animate={{
-                      backgroundPosition: ['0% 50%', '100% 50%'],
-                    }}
-                    transition={{
-                      backgroundPosition: {
-                        repeat: Infinity,
-                        duration: 3,
-                        ease: "linear"
-                      }
-                    }}
-                    style={{
-                      background: 'linear-gradient(to right, #34d399, #3b82f6, #34d399)',
-                      backgroundSize: '200% 100%'
-                    }}
-                  />
-                </motion.span>.
+                <HighlightedText text={currentCompany} />
               </p>
             </motion.div>
 

@@ -1,20 +1,12 @@
 import { motion } from 'framer-motion';
-import SkillCategory from './skills/skillsCategory';
+import { CategoryItem } from './skills/skillCategory';
+import { skillsData } from '../data';
 
 const Skills = () => {
   return (
     <section className="py-20 bg-gray-800/50 backdrop-blur-lg" id="skills">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-16">
-          <motion.p
-            className="text-emerald-400 text-sm font-medium tracking-wider uppercase mb-2"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            Professional Skillset
-          </motion.p>
           <motion.h2 
             className="text-3xl font-grotesk font-bold text-gradient"
             initial={{ opacity: 0, y: 20 }}
@@ -35,8 +27,15 @@ const Skills = () => {
             cloud infrastructure, and secure system design.
           </motion.p>
         </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <SkillCategory />
+          {skillsData.map((category, index) => (
+            <CategoryItem
+              key={index}
+              index={index}
+              {...category}
+            />
+          ))}
         </div>
       </div>
     </section>

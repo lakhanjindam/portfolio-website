@@ -1,7 +1,7 @@
 import {
   Database,
   Cloud,
-  Code,
+  Wrench,
   GitBranch,
   Network,
   Server,
@@ -10,6 +10,7 @@ import {
   Lock,
   LucideIcon
 } from 'lucide-react';
+import { SkillCategory } from './types';
 
 // Interfaces for experience
 interface Experience {
@@ -44,7 +45,7 @@ const heroSectionDescription = `Specialized in building scalable microservices a
 const experiences: Experience[] = [
     {
         duration: 'May 2022 - Present',
-        title: 'Senior SoftwareEngineer',
+        title: 'Senior Software Engineer',
         company: 'Twilio',
         description: `Building and developing cloud-native applications using Golang for Kuberenetes Ecosystem.`,
       },
@@ -155,67 +156,67 @@ const certifications: Certification[] = [
 ]
 
 
-const skillsData = [
+const skillsData: SkillCategory[] = [
   {
-    icon: Database,
-    title: 'Databases & Storage',
-    skills: [
-      { name: 'PostgreSQL', level: 90, rating: 5 },
-      { name: 'MongoDB', level: 85, rating: 4 },
-      { name: 'Redis', level: 80, rating: 3 },
-      { name: 'Elasticsearch', level: 75, rating: 2 },
-    ],
+      icon: Database,
+      title: 'Databases & Storage',
+      skills: [
+      { name: 'PostgreSQL', grade: 'A' },
+      { name: 'MongoDB', grade: 'A' },
+      { name: 'Redis', grade: 'B' },
+      { name: 'Elasticsearch', grade: 'B' },
+      ],
   },
   {
-    icon: Code,
-    title: 'Backend Development',
-    skills: [
-      { name: 'Node.js', level: 95, rating: 5 },
-      { name: 'Python', level: 85, rating: 4 },
-      { name: 'Java Spring Boot', level: 80, rating: 3 },
-      { name: 'GraphQL', level: 75, rating: 2 },
-    ],
+      icon: Server,
+      title: 'Backend Development',
+      skills: [
+      { name: 'Node.js', grade: 'A' },
+      { name: 'Python', grade: 'A' },
+      { name: 'Java Spring Boot', grade: 'B' },
+      { name: 'GraphQL', grade: 'B' },
+      ],
   },
   {
-    icon: Cloud,
-    title: 'Cloud & DevOps',
-    skills: [
-      { name: 'AWS', level: 85, rating: 4 },
-      { name: 'Docker', level: 90, rating: 5 },
-      { name: 'Kubernetes', level: 80, rating: 3 },
-      { name: 'Terraform', level: 75, rating: 2 },
-    ],
+      icon: Cloud,
+      title: 'Cloud & DevOps',
+      skills: [
+      { name: 'AWS', grade: 'A' },
+      { name: 'Docker', grade: 'A' },
+      { name: 'Kubernetes', grade: 'B' },
+      { name: 'Terraform', grade: 'B' },
+      ],
   },
   {
-    icon: Network,
-    title: 'System Architecture',
-    skills: [
-      { name: 'Microservices', level: 90, rating: 5 },
-      { name: 'Event-Driven Design', level: 85, rating: 4 },
-      { name: 'API Design', level: 90, rating: 5 },
-      { name: 'Distributed Systems', level: 80, rating: 3 },
-    ],
+      icon: Network,
+      title: 'System Architecture',
+      skills: [
+      { name: 'Microservices', grade: 'A' },
+      { name: 'Event-Driven Design', grade: 'A' },
+      { name: 'API Design', grade: 'A' },
+      { name: 'Distributed Systems', grade: 'B' },
+      ],
   },
   {
-    icon: Shield,
-    title: 'Security & Performance',
-    skills: [
-      { name: 'OAuth/JWT', level: 85, rating: 4 },
-      { name: 'System Hardening', level: 80, rating: 3 },
-      { name: 'Performance Tuning', level: 85, rating: 4 },
-      { name: 'Load Testing', level: 80, rating: 3 },
-    ],
+      icon: Shield,
+      title: 'Security & Performance',
+      skills: [
+      { name: 'OAuth/JWT', grade: 'A' },
+      { name: 'System Hardening', grade: 'D' },
+      { name: 'Performance Tuning', grade: 'A' },
+      { name: 'Load Testing', grade: 'B' },
+      ],
   },
   {
-    icon: GitBranch,
-    title: 'Tools & Practices',
-    skills: [
-      { name: 'CI/CD', level: 90, rating: 5 },
-      { name: 'Git Flow', level: 95, rating: 5 },
-      { name: 'Agile/Scrum', level: 85, rating: 4 },
-      { name: 'TDD', level: 80, rating: 3 },
-    ],
+      icon: Wrench, // Changed from Tool to Wrench
+      title: 'Tools & Practices',
+      skills: [
+      { name: 'CI/CD', grade: 'A' },
+      { name: 'Git Flow', grade: 'A' },
+      { name: 'Agile/Scrum', grade: 'A' },
+      { name: 'TDD', grade: 'B' },
+      ],
   },
-];
+  ];
 // Export the data
 export { experiences, projects, skills, currentCompany, heroSectionDescription, heroSectionSkills, certifications, skillsData};
