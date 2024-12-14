@@ -13,3 +13,14 @@ export interface SkillCategory {
   skills: Skill[];
 }
 
+export interface Certification {
+    id: string;
+    name: string;
+    issuer: string;
+    issueDate: string;
+    expiryDate?: string;
+    credentialId: string;
+    credentialUrl: string;
+    logo: string;
+    featured?: boolean;
+}

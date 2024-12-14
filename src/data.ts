@@ -120,40 +120,7 @@ const heroSectionSkills = [
     { color: 'emerald-400', name: 'Microservices Architecture' },
     { color: 'blue-400', name: 'Cloud Infrastructure' },
     { color: 'purple-400', name: 'System Design' },
-  ]
-
-
-  interface Certification {
-    id: number
-    title: string
-    issuer: string
-    date: string
-    skills: string[]
-  }
-  
-const certifications: Certification[] = [
-  {
-    id: 1,
-    title: "Full Stack Web Development",
-    issuer: "Udacity",
-    date: "2023",
-    skills: ["React", "Node.js", "Express", "PostgreSQL"]
-  },
-  {
-    id: 2,
-    title: "Machine Learning Engineer",
-    issuer: "Coursera",
-    date: "2022",
-    skills: ["Python", "TensorFlow", "Scikit-learn"]
-  },
-  {
-    id: 3,
-    title: "AWS Certified Solutions Architect",
-    issuer: "Amazon Web Services",
-    date: "2021",
-    skills: ["AWS", "Cloud Architecture", "Security"]
-  }
-]
+  ];
 
 
 const skillsData: SkillCategory[] = [
@@ -218,5 +185,40 @@ const skillsData: SkillCategory[] = [
       ],
   },
   ];
+
+const certifications = [
+  {
+    id: 'aws-sa',
+    name: 'AWS Certified Solutions Architect',
+    issuer: 'Amazon Web Services',
+    issueDate: '2023-06',
+    expiryDate: '2026-06',
+    credentialId: 'AWS-SA-12345',
+    credentialUrl: 'https://www.credly.com/badges/aws-sa',
+    logo: 'https://images.unsplash.com/photo-1614624532983-4ce03382d63d?auto=format&fit=crop&w=200&h=200',
+    featured: true
+  },
+  {
+    id: 'k8s-cka',
+    name: 'Certified Kubernetes Administrator',
+    issuer: 'Cloud Native Computing Foundation',
+    issueDate: '2023-03',
+    expiryDate: '2026-03',
+    credentialId: 'CKA-12345',
+    credentialUrl: 'https://www.credly.com/badges/cka',
+    logo: 'https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?auto=format&fit=crop&w=200&h=200',
+    featured: true
+  },
+  {
+    id: 'azure-dev',
+    name: 'Microsoft Azure Developer Associate',
+    issuer: 'Microsoft',
+    issueDate: '2023-01',
+    expiryDate: '2025-01',
+    credentialId: 'AZURE-12345',
+    credentialUrl: 'https://www.credly.com/badges/azure-dev',
+    logo: 'https://images.unsplash.com/photo-1633419461186-7d40a38105ec?auto=format&fit=crop&w=200&h=200'
+  }
+];
 // Export the data
 export { experiences, projects, skills, currentCompany, heroSectionDescription, heroSectionSkills, certifications, skillsData};

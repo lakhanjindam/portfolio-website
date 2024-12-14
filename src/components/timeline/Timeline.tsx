@@ -4,32 +4,6 @@ import TimelineItem from './TimelineItem';
 import TimelineLine from './TimelineLine'; // Assuming TimelineLine is a separate component
 import { experiences } from '../../data';
 
-// const experiences = [
-//   {
-//     year: '2023 - Present',
-//     title: 'Senior Backend Engineer',
-//     company: 'TechCorp',
-//     description: 'Leading the development of microservices architecture and implementing cloud-native solutions.',
-//   },
-//   {
-//     year: '2021 - 2023',
-//     title: 'Backend Engineer',
-//     company: 'InnovateTech',
-//     description: 'Developed and maintained scalable APIs serving millions of requests daily.',
-//   },
-//   {
-//     year: '2019 - 2021',
-//     title: 'Software Developer',
-//     company: 'StartupX',
-//     description: 'Built and deployed full-stack applications using modern technologies.',
-//   },
-//   {
-//     year: '2018 - 2019',
-//     title: 'Junior Developer',
-//     company: 'CodeCraft',
-//     description: 'Contributed to various web development projects and learned industry best practices.',
-//   },
-// ];
 
 const Timeline: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -48,10 +22,24 @@ const Timeline: React.FC = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">Experience</h2>
-          <p className="text-sm sm:text-base text-gray-400 max-w-2xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-3xl font-grotesk font-bold text-gradient mb-3 sm:text-4xl"
+          >
+            Experience
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-sm sm:text-base text-gray-400 max-w-2xl mx-auto"
+          >
             My professional journey and growth in the tech industry
-          </p>
+          </motion.p>
         </motion.div>
 
         <div className="relative">

@@ -1,0 +1,58 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Award } from 'lucide-react';
+import { CertificationCard } from './certificationCard';
+import { certifications } from '../../data';
+
+const Certifications: React.FC = () => {
+  return (
+    <section className="py-20 bg-gray-900/50 backdrop-blur-lg" id="certifications">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 text-emerald-400 text-sm font-medium mb-4"
+          >
+            <Award className="w-4 h-4" />
+            Professional Certifications
+          </motion.div>
+          
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-3xl font-grotesk font-bold text-gradient mb-4"
+          >
+            Certified Expertise
+          </motion.h2>
+          
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-gray-400 max-w-2xl mx-auto"
+          >
+            Industry-recognized certifications demonstrating proficiency in cloud, DevOps, and system architecture.
+          </motion.p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {certifications.map((cert, index) => (
+            <CertificationCard
+              key={cert.id}
+              certification={cert}
+              index={index}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Certifications;
