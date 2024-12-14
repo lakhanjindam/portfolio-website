@@ -41,8 +41,9 @@
     font-family: 'Monospace';
     font-weight: 600;
     gap: 0.3em; /* Add space between elements */
-    padding-right: 150px; /* Shift it to left for better alignment with hero section */
-    color: white;
+    max-width: 100%; /* Ensure it doesn't overflow its parent */
+    flex-shrink: 0; /* Don't shrink it */
+    box-sizing: border-box; /* Ensure padding is accounted for */
   }
   
   .creativeText span {
