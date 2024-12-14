@@ -72,7 +72,7 @@ export default function ScrollToTop() {
             r="45"
             fill="none"
             stroke="url(#gradient)"
-            strokeWidth="5"
+            strokeWidth="8"
             strokeLinecap="round"
             initial={{ pathLength: 0 }}
             animate={controls}
@@ -82,6 +82,9 @@ export default function ScrollToTop() {
           <defs>
             <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#10B981" />
+              <stop offset="25%" stopColor="#34D399" />
+              <stop offset="50%" stopColor="#059669" />
+              <stop offset="75%" stopColor="#2563EB" />
               <stop offset="100%" stopColor="#3B82F6" />
             </linearGradient>
           </defs>

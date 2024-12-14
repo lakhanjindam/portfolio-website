@@ -44,9 +44,10 @@ const Hero = () => {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1}}
+                style={{ fontFamily: 'Space Grotesk, sans-serif' }}
               >
                 <span className="block">Senior</span>
-                <span className="block text-gradient">Software Engineer</span>
+                <span className="block text-gradient" style={{ paddingBottom: '0.1em' }}>Software Engineer</span>
               </motion.h1>
               <p className="text-base sm:text-lg text-gray-400 max-w-lg mx-auto lg:mx-0">
                 {heroSectionDescription}
