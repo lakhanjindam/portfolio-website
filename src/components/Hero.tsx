@@ -1,13 +1,15 @@
 import { motion } from 'framer-motion';
-import { Terminal, ArrowRight, Github, Linkedin } from 'lucide-react';
+import {  ArrowRight, Github, Linkedin } from 'lucide-react';
 import { BorderAnimation } from './BorderAnimation';
 import { Button } from './ui/Button';
 import { TerminalWindow } from './terminal/TerminalWindow';
-import { currentCompany, heroSectionDescription, heroSectionSkills } from '../data';
+import { currentCompany, heroSectionDescription } from '../data';
 import './Hero.css'; // Import the CSS file for animations
 import { useEffect } from 'react';
 import HighlightedText from './HighlightedText';
 import CreativeTextAnimation from './creativeTextAnimation';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+
 
 const Hero = () => {
   useEffect(() => {
@@ -85,37 +87,22 @@ const Hero = () => {
             </motion.div>
           </motion.div>
 
+
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
+            animate={{ opacity: 1, scale: 2 }}
             transition={{ delay: 0.3, duration: 0.8 }}
             className="relative lg:block"
           >
             <div className="relative max-w-sm mx-auto lg:max-w-none">
-              <motion.div
-                animate={{ 
-                  y: [0, -10, 0],
-                  rotate: [-1, 1, -1]
-                }}
-                transition={{
-                  duration: 6,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                className="bg-gradient-to-br from-emerald-500/10 to-blue-500/10 rounded-2xl p-8 backdrop-blur-sm border border-white/10"
-              >
-                <Terminal className="w-16 h-16 text-emerald-400 mb-6" />
-                <div className="space-y-2">
-                  {heroSectionSkills.map(({ color, name }, index) => (
-                    <div key={index} className="flex items-center gap-2">
-                      <div className={`w-2 h-2 rounded-full bg-${color}`}></div>
-                      <span className="text-sm text-gray-300">{name}</span>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
+            <DotLottieReact
+              src="https://lottie.host/efc39ac5-f04a-467c-bf3d-758c507d68de/wkFIy80VoT.lottie"
+              loop
+              autoplay
+            />
             </div>
           </motion.div>
+          
         </div>
       </div>
     </div>
