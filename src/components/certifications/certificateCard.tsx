@@ -24,7 +24,7 @@ export function CertificateCard({ id, title, organization, date, description, ic
       <div className="aspect-[2/3] relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-gray-900/0" />
         <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-emerald-500/80 to-blue-500/20 opacity-0 group-hover:opacity-60 transition-opacity duration-500 ease-in-out" />
-        <div className="absolute inset-0 bg-white opacity-40 animate-shine group-hover:animate-none" />
+        <div className="absolute inset-0 bg-white animate-shine opacity-40 group-hover:opacity-0 transition-opacity duration-500 ease-in-out" />
         <div className="logo-container absolute inset-0 flex items-center justify-center transition-all duration-500 ease-in-out group-hover:opacity-0 group-hover:scale-0">
           {id.includes('k8s') && <SiKubernetes size={100} color={iconColor}/>}
           {id.includes('aws') && <FaAws size={100} color={iconColor}/>}
@@ -34,7 +34,7 @@ export function CertificateCard({ id, title, organization, date, description, ic
       </div>
       <CardContent className="absolute inset-0 p-6 flex flex-col justify-between text-white">
         <div className="transform group-hover:translate-y-0 transition-all duration-500 ease-in-out">
-          <h3 className="text-2xl font-bold mb-2 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-in-out bg-clip-text text-transparent bg-gradient-to-r from-emerald-500 to-blue-500 group-hover:text-white">{title}</h3>
+          <h3 className="text-2xl font-bold mb-2 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-in-out bg-clip-text text-transparent bg-gradient-to-r from-emerald-500 to-blue-600">{title}</h3>
           <div className="opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out delay-100 transform translate-y-4 group-hover:translate-y-0">
             <p className="text-md mb-4 text-gray-300">{organization}</p>
             <div className="flex items-center space-x-2 mb-4 text-gray-300">

@@ -3,6 +3,8 @@ import { motion, MotionValue, useTransform } from 'framer-motion';
 import TimelineDot from './TimelineDot';
 import { cn } from '../../utils/cn';
 import HighlightedText from '../HighlightedText';
+import { TwilioLogo } from './twilioLogo';
+import { BrowserStackLogo } from './browserstackLogo';
 
 interface TimelineItemProps {
   duration: string;
@@ -12,6 +14,7 @@ interface TimelineItemProps {
   index: number;
   progress: MotionValue<number>;
   total: number;
+  logo?: string;
 }
 
 const TimelineItem: React.FC<TimelineItemProps> = ({ 
@@ -21,7 +24,8 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
   description, 
   index,
   progress,
-  total
+  total,
+  logo
 }) => {
   const isEven = index % 2 === 0;
   
@@ -60,7 +64,19 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
         >
           <span className="text-emerald-400 font-medium block text-sm sm:text-base">{duration}</span>
           <h3 className="text-lg sm:text-xl font-bold text-white">{title}</h3>
-          <HighlightedText text={company} />
+          <div className="flex items-center gap-2">
+            <HighlightedText text={company} />
+            {logo?.includes('twilio') && (
+              <div className="overflow-hidden rounded-full w-8 h-8">
+                <TwilioLogo className="w-8 h-8" />
+              </div>
+            )}
+            {logo?.includes('browserstack') && (
+              <div className="overflow-hidden rounded-full w-8 h-8">
+                <BrowserStackLogo className="w-8 h-8" />
+              </div>
+            )}
+          </div>
           <ul className="text-gray-400 text-sm sm:text-base space-y-2">
             {description.split('\n').map((line, idx) => (
               <li key={idx} className="flex items-start gap-2 p-2 hover:bg-gray-800 transition-colors">

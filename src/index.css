@@ -104,7 +104,7 @@ body {
 /* Shine Animation */
 @layer utilities {
   .animate-shine {
-    -webkit-mask-image: linear-gradient(-60deg, rgba(0,0,0,0) 30%, #000 50%, rgba(0,0,0,0) 70%);
+    -webkit-mask-image: linear-gradient(-60deg, rgba(0,0,0,0) 40%, #000 50%, rgba(0,0,0,0) 60%);
     -webkit-mask-size: 200%;
     animation: shine 10s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   }

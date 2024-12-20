@@ -52,6 +52,7 @@ const Timeline: React.FC = () => {
                 index={index}
                 progress={scrollYProgress}
                 total={experiences.length}
+                logo={experience.logo}
               />
             ))}
           </div>
