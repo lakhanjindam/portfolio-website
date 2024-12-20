@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Award } from 'lucide-react';
-import { CertificationCard } from './certificationCard';
 import { certifications } from '../../data';
+import { CertificateCard } from './certificateCard';
 
 const Certifications: React.FC = () => {
   return (
@@ -41,12 +41,16 @@ const Certifications: React.FC = () => {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {certifications.map((cert, index) => (
-            <CertificationCard
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          {certifications.map((cert) => (
+            <CertificateCard
               key={cert.id}
-              certification={cert}
-              index={index}
+              title={cert.name}
+              organization={cert.issuer}
+              date={cert.issueDate}
+              description={cert.description}
+              id={cert.id}
+              iconColor={cert.iconColor}
             />
           ))}
         </div>

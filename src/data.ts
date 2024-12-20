@@ -195,6 +195,8 @@ const certifications: Certification[] = [
     id: 'k8s-cka',
     name: 'Certified Kubernetes Administrator',
     issuer: 'Cloud Native Computing Foundation',
+    description: `Earners of this designation demonstrated the skills, knowledge and competencies to perform the responsibilities of a Kubernetes Application Developer. 
+    Earners are able to define application resources and use core primitives to build, monitor, and troubleshoot scalable applications and tools in Kubernetes.`,
     issueDate: '2024-08',
     expiryDate: '2027-08',
     credentialId: 'LF-u23yc6zyq5',
@@ -207,6 +209,7 @@ const certifications: Certification[] = [
     id: 'k8s-ckad',
     name: 'Certified Kubernetes Application Developer',
     issuer: 'Cloud Native Computing Foundation',
+    description: 'This certification provides a comprehensive understanding of Kubernetes, including its architecture, concepts, and best practices.',
     issueDate: '2023-03',
     expiryDate: '2026-03',
     credentialId: 'LF-vbodhngh33',
@@ -218,6 +221,7 @@ const certifications: Certification[] = [
   {
     id: 'terraform-assoc',
     name: 'Terraform Associate',
+    description: 'This certification provides a comprehensive understanding of Terraform, including its architecture, concepts, and best practices.',
     issuer: 'HashiCorp',
     issueDate: '2023-05',
     expiryDate: '2025-05',

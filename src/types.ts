@@ -24,4 +24,5 @@ export interface Certification {
     logo: string;
     featured?: boolean;
     iconColor?: string;
+    description?: string;
 }
