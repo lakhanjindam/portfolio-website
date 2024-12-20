@@ -45,12 +45,15 @@ const Certifications: React.FC = () => {
           {certifications.map((cert) => (
             <CertificateCard
               key={cert.id}
+              id={cert.id}
               title={cert.name}
               organization={cert.issuer}
               date={cert.issueDate}
               description={cert.description}
-              id={cert.id}
+              credentialId={cert.credentialId}
               iconColor={cert.iconColor}
+              credentialUrl={cert.credentialUrl}
+              skills={cert.skills}
             />
           ))}
         </div>

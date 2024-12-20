@@ -194,22 +194,22 @@ const certifications: Certification[] = [
   {
     id: 'k8s-cka',
     name: 'Certified Kubernetes Administrator',
-    issuer: 'Cloud Native Computing Foundation',
-    description: `Earners of this designation demonstrated the skills, knowledge and competencies to perform the responsibilities of a Kubernetes Application Developer. 
-    Earners are able to define application resources and use core primitives to build, monitor, and troubleshoot scalable applications and tools in Kubernetes.`,
+    issuer: 'CNCF',
+    description: 'Earners of this designation have proven proficiency in managing Kubernetes clusters, including application lifecycle, installation, configuration, networking, scheduling, security, maintenance, monitoring, storage, and troubleshooting.',
     issueDate: '2024-08',
-    expiryDate: '2027-08',
+    expiryDate: '2027-08',  
     credentialId: 'LF-u23yc6zyq5',
     credentialUrl: 'https://www.credly.com/badges/552a217c-f1eb-4878-8675-0ccd4dbf4b97/public_url',
     logo: 'https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?auto=format&fit=crop&w=200&h=200',
     featured: true,
     iconColor: '#326CE5',
+    skills: ['Kubernetes', 'Containers', 'Pods', 'Deployment', 'Services', 'Network', 'Storage', 'Security', 'Monitoring', 'Configuration', 'Ingress', 'Helm', 'Troubleshooting', 'SRE', 'Sys admin', ]
   },
   {
     id: 'k8s-ckad',
     name: 'Certified Kubernetes Application Developer',
-    issuer: 'Cloud Native Computing Foundation',
-    description: 'This certification provides a comprehensive understanding of Kubernetes, including its architecture, concepts, and best practices.',
+    issuer: 'CNCF',
+    description: 'Earners of this designation have proven expertise in developing, deploying, and managing scalable applications on Kubernetes, including core concepts, configuration, pod design, observability, networking, and state persistence.',
     issueDate: '2023-03',
     expiryDate: '2026-03',
     credentialId: 'LF-vbodhngh33',
@@ -217,11 +217,12 @@ const certifications: Certification[] = [
     logo: 'https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?auto=format&fit=crop&w=200&h=200',
     featured: true,
     iconColor: '#326CE5',
+    skills: ['Kubernetes', 'Containers', 'Orchestration', 'Cloud-native apps', 'Volumes', 'Secrets', 'ConfigMaps', 'Pods', 'Services']
   },
   {
     id: 'terraform-assoc',
-    name: 'Terraform Associate',
-    description: 'This certification provides a comprehensive understanding of Terraform, including its architecture, concepts, and best practices.',
+    name: 'Hashicorp Certified: Terraform Associate',
+    description: 'Earners of the HashiCorp Certified: Terraform Associate certification demonstrate foundational knowledge of Terraform, its use cases, and its application in both open-source and enterprise environments to address business-critical objectives.',
     issuer: 'HashiCorp',
     issueDate: '2023-05',
     expiryDate: '2025-05',
@@ -230,6 +231,7 @@ const certifications: Certification[] = [
     logo: 'https://images.unsplash.com/photo-1614624532983-4ce03382d63d?auto=format&fit=crop&w=200&h=200',
     featured: false,
     iconColor: '#7A00E6',
+    skills: ['Terraform', 'Cloud', 'Infrastructure', 'DevOps', 'IaC', 'Automation', 'Orchestration']
   }
 ];
 // Export the data

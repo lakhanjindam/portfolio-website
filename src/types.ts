@@ -25,4 +25,5 @@ export interface Certification {
     featured?: boolean;
     iconColor?: string;
     description?: string;
+    skills: string[]
 }
