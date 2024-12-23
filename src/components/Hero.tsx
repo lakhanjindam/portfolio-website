@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import HighlightedText from './HighlightedText';
 import CreativeTextAnimation from './creativeTextAnimation';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import { FloatingNavBar } from './floatingNavbar';
 
 
 const Hero = () => {
@@ -20,7 +21,8 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-gray-900 text-white px-4 overflow-hidden">
+    <div className="relative min-h-screen flex items-center justify-center bg-gray-900 text-white px-4 overflow-hidden" id='home'>
+      <FloatingNavBar />
       <TerminalWindow />
       <BorderAnimation />
       
