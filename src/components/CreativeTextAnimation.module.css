@@ -29,11 +29,10 @@
     --primary-color: #01fe87;
     --text-color: #ffffff;
     --text-color-transparent: rgba(255, 255, 255, 0.1);
-    --gradient-color-1: #ff8c00;
-    --gradient-color-2: #ffd700;
-    --gradient-color-3: #00b33c;
-    --gradient-color-4: #00ffc7;
-  
+    --gradient-color-1: #2ecc71;
+    --gradient-color-2: #00fff2;
+    --gradient-color-3: #00a6ff;
+    --gradient-color-4: #1a8df1;
     display: inline-flex;
     align-items: center;
     font-style: italic;
@@ -48,7 +47,7 @@
   
   .creativeText span {
     position: relative;
-    color: white; /* Change from var(--text-color-transparent) to black */
+    color: grey; /* Change from var(--text-color-transparent) to black */
     animation: displayText 12s infinite;
   }
 
@@ -74,7 +73,7 @@
     background-size: 500% auto;
     border-right: 2px solid var(--gradient-color-1);
     color: transparent;
-    animation: animate 3s linear infinite, animateText 4s ease-in-out infinite alternate;
+    animation: animate 3s linear infinite, animateText 5s ease-in-out infinite alternate;
   }
   
   

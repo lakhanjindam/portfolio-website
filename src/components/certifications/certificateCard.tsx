@@ -1,6 +1,5 @@
 // import Image from 'next/image'
 import { Card, CardContent } from "../ui/card"
-import { Badge } from "../ui/badge"
 import { CalendarIcon } from 'lucide-react'
 import { FaAws} from 'react-icons/fa';
 import { SiKubernetes, SiTerraform } from 'react-icons/si';
@@ -11,14 +10,15 @@ interface CertificateCardProps {
   iconColor?: string
   title: string
   organization: string
-  date: string
+  issueDate: string
   description?: string
   credentialUrl: string
   skills: string[]
   credentialId: string
+  expiryDate?: string
 }
 
-export function CertificateCard({ id, title, organization, date, description, iconColor, credentialUrl, skills }: CertificateCardProps) {
+export function CertificateCard({ id, title, organization, issueDate, expiryDate, description, iconColor, credentialUrl, skills }: CertificateCardProps) {
   return (
     <Card className="relative overflow-hidden transition-all duration-500 ease-in-out hover:shadow-lg hover:shadow-purple-500/40 group bg-gray-800 border-gray-700">
       <div className="aspect-[2/3] relative overflow-hidden">
@@ -34,14 +34,14 @@ export function CertificateCard({ id, title, organization, date, description, ic
       </div>
       <CardContent className="absolute inset-0 p-6 flex flex-col justify-between text-white">
         <div className="transform group-hover:translate-y-0 transition-all duration-500 ease-in-out">
-          <h3 className="text-2xl font-bold mb-2 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-in-out bg-clip-text text-transparent bg-gradient-to-r from-emerald-500 to-blue-600">{title}</h3>
+          <h3 className="text-2xl font-bold mb-2 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-in-out bg-clip-text text-transparent bg-gradient-to-r from-emerald-500 to-blue-600 group-hover:text-white">{title}</h3>
           <div className="opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out delay-100 transform translate-y-4 group-hover:translate-y-0">
             <p className="text-md mb-4 text-gray-300">{organization}</p>
             <div className="flex items-center space-x-2 mb-4 text-gray-300">
               <CalendarIcon className="w-5 h-5" />
-              <span className="text-sm">Issued: {date}</span>
+              <span className="text-sm">Issued: {issueDate}</span>
               <span>•</span>
-              <span className="text-sm">Expires: {date}</span>
+              <span className="text-sm">Expires: {expiryDate}</span>
             </div>
             <p className="text-sm mb-4 text-gray-300">
               <button

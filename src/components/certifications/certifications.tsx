@@ -48,7 +48,8 @@ const Certifications: React.FC = () => {
               id={cert.id}
               title={cert.name}
               organization={cert.issuer}
-              date={cert.issueDate}
+              issueDate={cert.issueDate}
+              expiryDate={cert.expiryDate}
               description={cert.description}
               credentialId={cert.credentialId}
               iconColor={cert.iconColor}
