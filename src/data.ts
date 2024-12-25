@@ -2,26 +2,17 @@ import {
   Database,
   Cloud,
   Wrench,
-  GitBranch,
-  Network,
-  Server,
-  Shield,
-  Terminal,
-  Lock,
   Code,
   User,
   Briefcase,
   Mail,
   Star,
   Medal,
-  LucideIcon,
   Search,
   GitBranchIcon,
-  Webcam
+  Globe,
 } from 'lucide-react';
 import { Certification, SkillCategory, NavItem } from './types';
-import { GoReport } from 'react-icons/go';
-import { FaTowerObservation } from 'react-icons/fa6';
 
 
 // Interfaces for experience
@@ -117,7 +108,7 @@ const skillsData: SkillCategory[] = [
       ],
   },
   {
-    icon: Webcam,
+    icon: Globe,
     title: 'Web Technologies',
     skills: [
       { name: 'RESTful APIs', grade: 'A' },

@@ -8,7 +8,17 @@ const Certifications: React.FC = () => {
   return (
     <section className="py-20 bg-gray-900/50 backdrop-blur-lg" id="certifications">
       <div className="max-w-6xl mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-3xl font-grotesk font-bold text-gradient mb-4"
+          >
+            Certified Expertise
+          </motion.h2>
+          
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -19,16 +29,6 @@ const Certifications: React.FC = () => {
             <Award className="w-4 h-4" />
             Professional Certifications
           </motion.div>
-          
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-3xl font-grotesk font-bold text-gradient mb-4"
-          >
-            Certified Expertise
-          </motion.h2>
           
           <motion.p
             initial={{ opacity: 0, y: 20 }}
