@@ -8,10 +8,21 @@ import {
   Shield,
   Terminal,
   Lock,
+  Code,
+  User,
+  Briefcase,
+  Mail,
+  Star,
+  Medal,
   LucideIcon,
-  Code
+  Search,
+  GitBranchIcon,
+  Webcam
 } from 'lucide-react';
-import { Certification, SkillCategory } from './types';
+import { Certification, SkillCategory, NavItem } from './types';
+import { GoReport } from 'react-icons/go';
+import { FaTowerObservation } from 'react-icons/fa6';
+
 
 // Interfaces for experience
 interface Experience {
@@ -19,7 +30,6 @@ interface Experience {
     company: string;
     duration: string;
     description: string;
-    logo: string;
 }
 
 // Interfaces for projects
@@ -29,13 +39,6 @@ interface Project {
     tech: string[];
     github: string;
     live: string;
-}
-
-// Interfaces for skills
-interface Skill {
-    icon: LucideIcon;
-    name: string;
-    description: string;
 }
 
 const currentCompany = 'Twilio';
@@ -50,18 +53,16 @@ const experiences: Experience[] = [
         title: 'Senior Software Engineer',
         company: 'Twilio',
         description: `Building and developing cloud-native applications using Golang for Kuberenetes Ecosystem.`,
-        logo: '../../img/twilio.svg'
       },
       {
         duration: 'Aug 2020 - Apr 2022',
         title: 'Software Engineer',
         company: 'BrowserStack',
-        description: `Built, developed and managed Speedlab application and infrastructure for BrowserStack.`,
-        logo: '../../img/browserstack.svg'
+        description: `Built, developed and managed Speedlab application and infrastructure for BrowserStack.`
       },
 ];
 
-
+// NOTE: not used currently
 const projects: Project[] = [
     {
         title: 'Scalable Microservices Architecture',
@@ -86,39 +87,6 @@ const projects: Project[] = [
       }
 ];
 
-const skills: Skill[] = [
-    { 
-        icon: Database, 
-        name: 'Database Design', 
-        description: 'PostgreSQL, MongoDB, Redis, MySQL',
-    },
-    { 
-        icon: Server, 
-        name: 'Backend Development', 
-        description: 'Golang, Python, Ruby, Node.js',
-    },
-    { 
-        icon: Cloud, 
-        name: 'Cloud Services', 
-        description: 'AWS, Docker, Kubernetes',
-    },
-    { 
-        icon: Lock, 
-        name: 'Security', 
-        description: 'OAuth, JWT, Encryption',
-    },
-    { 
-        icon: GitBranch, 
-        name: 'Version Control', 
-        description: 'Git, CI/CD, DevOps, GitHub',
-    },
-    { 
-        icon: Terminal, 
-        name: 'System Design', 
-        description: 'Microservices, API Design, Distributed Systems',
-    },
-];
-
 const heroSectionSkills = [
     { color: 'emerald-400', name: 'Microservices Architecture' },
     { color: 'blue-400', name: 'Cloud Infrastructure' },
@@ -128,8 +96,19 @@ const heroSectionSkills = [
 
 const skillsData: SkillCategory[] = [
   {
+      icon: Code,
+      title: 'Programming Languages',
+      skills: [
+      { name: 'Golang', grade: 'A' },
+      { name: 'Python', grade: 'A' },
+      { name: 'Shell Scripting', grade: 'A' },
+      { name: 'Ruby', grade: 'B' },
+      { name: 'Javascript', grade: 'B' },
+      ],
+  },
+  {
       icon: Database,
-      title: 'Databases & Storage',
+      title: 'Databases',
       skills: [
       { name: 'PostgreSQL', grade: 'A' },
       { name: 'MySQL', grade: 'A' },
@@ -138,56 +117,63 @@ const skillsData: SkillCategory[] = [
       ],
   },
   {
-      icon: Code,
-      title: 'Backend Development',
-      skills: [
-      { name: 'Golang', grade: 'A' },
-      { name: 'Python', grade: 'A' },
-      {name: 'Ruby', grade: 'B' },
-      { name: 'Javascript', grade: 'B' },
-      ],
+    icon: Webcam,
+    title: 'Web Technologies',
+    skills: [
+      { name: 'RESTful APIs', grade: 'A' },
+      { name: 'ReactJS', grade: 'B' },
+      { name: 'NodeJS', grade: 'B' },
+      { name: 'NextJS', grade: 'B' },
+      { name: 'HTML/CSS', grade: 'C' },
+      { name: 'ExpressJS', grade: 'B' },
+    ],
   },
   {
       icon: Cloud,
-      title: 'Cloud & DevOps',
+      title: 'Cloud & Infra',
       skills: [
-      { name: 'AWS', grade: 'B' },
-      { name: 'Docker', grade: 'A' },
-      { name: 'Kubernetes', grade: 'A' },
-      { name: 'Terraform', grade: 'A' },
+        { name: 'Docker', grade: 'A' },
+        { name: 'Kubernetes', grade: 'A' },
+        { name: 'ArgoCD', grade: 'A' },
+        { name: 'AWS', grade: 'B' },
+      { name: 'Terraform', grade: 'B' },
+      { name: 'Helm', grade: 'B' },
       ],
   },
   {
-      icon: Network,
-      title: 'System Architecture',
+      icon: Search,
+      title: 'Observability & Incident Management',
       skills: [
-      { name: 'Microservices', grade: 'B' },
-      { name: 'Event-Driven Design', grade: 'B' },
-      { name: 'API Design', grade: 'A' },
-      { name: 'Distributed Systems', grade: 'A' },
+      { name: 'Datadog', grade: 'A' },
+      { name: 'Prometheus', grade: 'B' },
+      { name: 'Grafana', grade: 'B' },
+      { name: 'PagerDuty', grade: 'B' },
+      { name: 'FireHydrant', grade: 'B' },
       ],
   },
   {
-      icon: Shield,
-      title: 'Security & Performance',
+      icon: GitBranchIcon,
+      title: 'CI/CD & Version Control',
       skills: [
-      { name: 'OAuth/JWT', grade: 'A' },
-      { name: 'System Hardening', grade: 'D' },
-      { name: 'Performance Tuning', grade: 'A' },
-      { name: 'Load Testing', grade: 'B' },
+      { name: 'Git', grade: 'A' },
+      { name: 'Github', grade: 'A' },
+      { name: 'Buildkite', grade: 'A' },
+      { name: 'Jenkins', grade: 'B' },
+      { name: 'Github Actions', grade: 'C' },
+
       ],
   },
   {
-      icon: Wrench, // Changed from Tool to Wrench
+      icon: Wrench,
       title: 'Tools & Practices',
       skills: [
-      { name: 'CI/CD', grade: 'A' },
-      {name: 'Git', grade: 'A' },
-      {name: 'GitOps', grade: 'A' },
-      { name: 'Git Flow', grade: 'A' },
-      { name: 'Agile/Scrum/Kanban', grade: 'A' },
-      { name: 'TDD', grade: 'B' },
-      {name: 'Temporal.io', grade: 'A' },
+      { name: 'Slack', grade: 'A' },
+      { name: 'GitOps', grade: 'A' },
+      { name: 'Temporal.io', grade: 'A' },
+      { name: 'Agile', grade: 'A' },
+      { name: 'Kanban', grade: 'A' },
+      { name: 'Test Driven Development', grade: 'A' },
+      { name: 'Behavior Driven Development', grade: 'B' },
       ],
   },
   ];
@@ -236,5 +222,13 @@ const certifications: Certification[] = [
     skills: ['Terraform', 'Cloud', 'Infrastructure', 'DevOps', 'IaC', 'Automation', 'Orchestration']
   }
 ];
+
+const navItems: NavItem[] = [ 
+  { name: 'Home', href: '#home', icon: User },
+  { name: 'Experience', href: '#experience', icon: Briefcase },
+  { name: 'Skills', href: '#skills', icon: Star },
+  { name: 'Certifications', href: '#certifications', icon: Medal },
+  { name: 'Contact', href: '#contact', icon: Mail },
+]
 // Export the data
-export { experiences, projects, skills, currentCompany, heroSectionDescription, heroSectionSkills, certifications, skillsData};
+export { experiences, projects, currentCompany, heroSectionDescription, heroSectionSkills, certifications, skillsData, navItems};

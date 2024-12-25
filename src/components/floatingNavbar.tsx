@@ -1,21 +1,9 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { User, Briefcase, Mail, Menu, X, Star, Medal } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import './floatingNavbar.css'
+import { navItems } from '../data'
 
-interface NavItem {
-  name: string;
-  href: string;
-  icon: React.ElementType;
-}
-
-const navItems: NavItem[] = [ 
-  { name: 'Home', href: '#home', icon: User },
-  { name: 'Experience', href: '#experience', icon: Briefcase },
-  { name: 'Skills', href: '#skills', icon: Star },
-  { name: 'Certifications', href: '#certifications', icon: Medal },
-  { name: 'Contact', href: '#contact', icon: Mail },
-]
 
 export function FloatingNavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)

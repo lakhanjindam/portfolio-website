@@ -1,19 +1,19 @@
 import { LucideIcon } from "lucide-react";
 
-export type SkillGrade = 'A' | 'B' | 'C' | 'D';
+type SkillGrade = 'A' | 'B' | 'C' | 'D';
 
-export interface Skill {
+interface Skill {
   name: string;
   grade: SkillGrade;
 }
 
-export interface SkillCategory {
+interface SkillCategory {
   icon: LucideIcon; // LucideIcon type
   title: string;
   skills: Skill[];
 }
 
-export interface Certification {
+interface Certification {
     id: string;
     name: string;
     issuer: string;
@@ -27,3 +27,12 @@ export interface Certification {
     description?: string;
     skills: string[]
 }
+
+
+interface NavItem {
+  name: string;
+  href: string;
+  icon: React.ElementType;
+}
+
+export type { NavItem, Certification, SkillCategory, Skill, SkillGrade };
