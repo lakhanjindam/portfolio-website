@@ -59,7 +59,7 @@
   top: 0;
   right: 0;
   width: 50%;
-  height: 100vh;
+  height: 100%;
   background: rgba(17, 17, 17, 0.5);
   backdrop-filter: blur(10px);
   opacity: 1;
@@ -112,7 +112,7 @@
   bottom: -5px;
   width: 0;
   height: 2px;
-  background-color: #10b981;
+  background-image: linear-gradient(to right, #34D399, #3598d2);
   transition: width 0.3s ease;
 }
 
@@ -122,7 +122,7 @@
 
 @media (max-width: 768px) {
   .nav-blob {
-    width: 100%;
+    width: 65%;
     height: 50vh;
   }
 
