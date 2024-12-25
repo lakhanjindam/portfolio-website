@@ -18,7 +18,7 @@ interface CertificateCardProps {
   expiryDate?: string
 }
 
-export function CertificateCard({ id, title, organization, issueDate, expiryDate, description, iconColor, credentialUrl, skills }: CertificateCardProps) {
+export function CertificateCard({ id, title, organization, issueDate, expiryDate, description, iconColor, credentialUrl }: CertificateCardProps) {
   return (
     <Card className="relative overflow-hidden transition-all duration-500 ease-in-out hover:shadow-lg hover:shadow-purple-500/40 group bg-gray-800 border-gray-700">
       <div className="aspect-[2/3] relative overflow-hidden">

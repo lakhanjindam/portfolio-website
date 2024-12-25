@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Home, User, Briefcase, Mail, Menu, X, Medal } from 'lucide-react'
-import './FloatingNavBar.css'
+import { User, Briefcase, Mail, Menu, X, Star, Medal } from 'lucide-react'
+import './floatingNavbar.css'
 
 interface NavItem {
   name: string;
@@ -9,10 +9,10 @@ interface NavItem {
   icon: React.ElementType;
 }
 
-const navItems: NavItem[] = [
-  { name: 'Home', href: '#home', icon: Home },
+const navItems: NavItem[] = [ 
+  { name: 'Home', href: '#home', icon: User },
   { name: 'Experience', href: '#experience', icon: Briefcase },
-  { name: 'Skills', href: '#skills', icon: User },
+  { name: 'Skills', href: '#skills', icon: Star },
   { name: 'Certifications', href: '#certifications', icon: Medal },
   { name: 'Contact', href: '#contact', icon: Mail },
 ]
@@ -44,7 +44,7 @@ export function FloatingNavBar() {
   }
 
   return (
-    <div className="fixed top-[-1rem] left-[-1.5rem] md:top-[1.5rem] md:left-[1.5rem] z-50">
+    <div className="fixed top-[-1rem] right-[-1rem] md:top-[1.5rem] md:right-[1.5rem] z-50">
       <motion.nav
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -63,13 +63,17 @@ export function FloatingNavBar() {
                 <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur" />
                 <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
               </filter>
+              <linearGradient id="buttonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#10B981" />
+                <stop offset="100%" stopColor="#3B82F6" />
+              </linearGradient>
             </defs>
             <g filter="url(#goo)">
-              <circle className="blob" cx="100" cy="100" r="40" />
-              <circle className="blob" cx="100" cy="100" r="40" />
-              <circle className="blob" cx="100" cy="100" r="40" />
-              <circle className="blob" cx="100" cy="100" r="40" />
-              <circle className="blob" cx="100" cy="100" r="40" />
+              <circle className="blob" cx="100" cy="100" r="40" fill="url(#buttonGradient)" />
+              <circle className="blob" cx="100" cy="100" r="40" fill="url(#buttonGradient)" />
+              <circle className="blob" cx="100" cy="100" r="40" fill="url(#buttonGradient)" />
+              <circle className="blob" cx="100" cy="100" r="40" fill="url(#buttonGradient)" />
+              <circle className="blob" cx="100" cy="100" r="40" fill="url(#buttonGradient)" />
             </g>
           </svg>
           <span className="button-content">
@@ -90,14 +94,14 @@ export function FloatingNavBar() {
               exit="closed"
               variants={{
                 open: {
-                  clipPath: `circle(150% at 40px 40px)`,
+                  clipPath: 'circle(150% at 90vw 40px)',
                   transition: {
                     duration: 0.75,
                     ease: [0.76, 0, 0.24, 1],
                   }
                 },
                 closed: {
-                  clipPath: `circle(0% at 40px 40px)`,
+                  clipPath: 'circle(0% at 90vw 40px)',
                   transition: {
                     duration: 0.75,
                     ease: [0.76, 0, 0.24, 1],
