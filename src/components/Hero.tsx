@@ -11,8 +11,8 @@ import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { FloatingNavBar } from './floatingNavbar';
 
 const socialLinks = [
-  { href: "https://github.com/lakhanjindam", icon: Github, label: "GitHub" },
-  { href: "https://linkedin.com/in/lakhan-jindam", icon: Linkedin, label: "LinkedIn" }
+  { href: "https://github.com/lakhanjindam", icon: Github, label: "GitHub", color: 'emerald' },
+  { href: "https://linkedin.com/in/lakhan-jindam", icon: Linkedin, label: "LinkedIn", color: 'blue' }
 ]
 
 const Hero = () => {
@@ -84,8 +84,8 @@ const Hero = () => {
               transition={{ delay: 0.6 }}
               className="flex items-center justify-center lg:justify-start gap-4 sm:gap-6 mt-6 sm:mt-8"
             >
-              {socialLinks.map(({ href, icon: Icon, label }) => (
-                <a key={href} href={href} className="inline-flex items-center justify-center w-10 h-10 hover:text-emerald-400 rounded-full bg-gray-800 bg-opacity-50 hover:bg-opacity-100 transition-colors" aria-label={label}>
+              {socialLinks.map(({ href, icon: Icon, label, color }) => (
+                <a key={href} href={href} className={`inline-flex items-center justify-center w-10 h-10 hover:text-${color}-400 rounded-full bg-gray-800 bg-opacity-50 hover:bg-opacity-100 transition-colors`} aria-label={label}>
                   <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
                 </a>
               ))}            

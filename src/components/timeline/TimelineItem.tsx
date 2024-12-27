@@ -65,13 +65,13 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
           <span className="text-emerald-400 font-medium block text-sm sm:text-base">{duration}</span>
           <h3 className="text-lg sm:text-xl font-bold text-white">{title}</h3>
           <div className="flex items-center gap-2">
-            <a
+            {/* <a
               href={companyURL}
               target="_blank"
               rel="noopener noreferrer"
-            >
-              <HighlightedText text={company} />
-            </a>
+            > */}
+              <HighlightedText text={company} link={companyURL} />
+            {/* </a> */}
             {company?.toLowerCase().includes('twilio') && (
               <div className="overflow-hidden rounded-full w-8 h-8">
                 <TwilioLogo className="w-8 h-8" />

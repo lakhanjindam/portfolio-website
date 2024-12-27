@@ -1,8 +1,17 @@
 import { motion } from 'framer-motion';
 
+/**
+ * Border animation component.
+ * This component renders 4 divs that animate in a way that creates a border animation effect.
+ * The animation is done by animating the x and y positions of the divs, which are styled with linear gradients.
+ * The animation is set to repeat infinitely.
+ * The delay between each animation is set to create a staggered effect.
+ * @returns {JSX.Element}
+ */
 export const BorderAnimation = () => {
   return (
     <>
+      {/* Top border animation */}
       <motion.div 
         className="absolute top-0 left-0 w-full h-[2px]"
         style={{
@@ -18,6 +27,7 @@ export const BorderAnimation = () => {
         }}
       />
       
+      {/* Right border animation */}
       <motion.div 
         className="absolute top-0 right-0 w-[2px] h-full"
         style={{
@@ -34,6 +44,7 @@ export const BorderAnimation = () => {
         }}
       />
       
+      {/* Bottom border animation */}
       <motion.div 
         className="absolute bottom-0 right-0 w-full h-[2px]"
         style={{
@@ -50,6 +61,7 @@ export const BorderAnimation = () => {
         }}
       />
       
+      {/* Left border animation */}
       <motion.div 
         className="absolute bottom-0 left-0 w-[2px] h-full"
         style={{
