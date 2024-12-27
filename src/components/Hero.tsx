@@ -10,6 +10,11 @@ import CreativeTextAnimation from './creativeTextAnimation';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { FloatingNavBar } from './floatingNavbar';
 
+const socialLinks = [
+  { href: "https://github.com/lakhanjindam", icon: Github, label: "GitHub" },
+  { href: "https://linkedin.com/in/lakhan-jindam", icon: Linkedin, label: "LinkedIn" }
+]
+
 const Hero = () => {
   useEffect(() => {
     const nameElement = document.querySelector('.handwriting');
@@ -24,7 +29,7 @@ const Hero = () => {
       {/* NOTE: disabled for now
        <TerminalWindow /> 
        */}  
-      {/* <BorderAnimation /> */}
+      <BorderAnimation />
       
       <div className="relative z-10 max-w-6xl mx-auto w-full px-2 sm:px-4 lg:px-8">
         <div className="pt-16 lg:pt-0 grid lg:grid-cols-2 gap-6 lg:gap-12 items-center">
@@ -79,12 +84,11 @@ const Hero = () => {
               transition={{ delay: 0.6 }}
               className="flex items-center justify-center lg:justify-start gap-4 sm:gap-6 mt-6 sm:mt-8"
             >
-              <a href="https://github.com/lakhanjindam" className="text-gray-400 hover:text-emerald-400 transition-colors">
-                <Github className="w-6 h-6" />
-              </a>
-              <a href="https://linkedin.com/in/lakhan-jindam" className="text-gray-400 hover:text-emerald-400 transition-colors">
-                <Linkedin className="w-6 h-6" />
-              </a>              
+              {socialLinks.map(({ href, icon: Icon, label }) => (
+                <a key={href} href={href} className="inline-flex items-center justify-center w-10 h-10 hover:text-emerald-400 rounded-full bg-gray-800 bg-opacity-50 hover:bg-opacity-100 transition-colors" aria-label={label}>
+                  <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
+                </a>
+              ))}            
             </motion.div>
           </motion.div>
 
