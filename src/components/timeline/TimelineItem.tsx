@@ -14,7 +14,7 @@ interface TimelineItemProps {
   index: number;
   progress: MotionValue<number>;
   total: number;
-  companyURL: string
+  companyURL: string;
 }
 
 const TimelineItem: React.FC<TimelineItemProps> = ({ 
@@ -29,11 +29,9 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
 }) => {
   const isEven = index % 2 === 0;
   
-  // Calculate the progress threshold for this item
   const threshold = index / total;
   const nextThreshold = (index + 1) / total;
   
-  // Create a motion value that goes from 0 to 1 for this item
   const itemProgress = useTransform(
     progress,
     [threshold, nextThreshold],
@@ -42,8 +40,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
 
   return (
     <div className="relative py-8 sm:py-16">
-      {/* Center container for the dot */}
-      <div className="absolute left-0 sm:left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 sm:-translate-x-1/2 z-10">
+      <div className="absolute left-[-6px] sm:left-1/2 top-1/2 -translate-y-1/2 sm:-translate-x-1/2">
         <TimelineDot progress={itemProgress} index={index} isEven={isEven} />
       </div>
       
@@ -65,13 +62,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
           <span className="text-emerald-400 font-medium block text-sm sm:text-base">{duration}</span>
           <h3 className="text-lg sm:text-xl font-bold text-white">{title}</h3>
           <div className="flex items-center gap-2">
-            {/* <a
-              href={companyURL}
-              target="_blank"
-              rel="noopener noreferrer"
-            > */}
-              <HighlightedText text={company} link={companyURL} />
-            {/* </a> */}
+            <HighlightedText text={company} link={companyURL} />
             {company?.toLowerCase().includes('twilio') && (
               <div className="overflow-hidden rounded-full w-8 h-8">
                 <TwilioLogo className="w-8 h-8" />

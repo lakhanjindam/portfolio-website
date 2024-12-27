@@ -4,7 +4,7 @@ import { skillsData } from '../data';
 
 const Skills = () => {
   return (
-    <section className="py-20 bg-gray-800/50 backdrop-blur-lg" id="skills">
+    <section className="py-20 bg-gray-900/50" id="skills">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-16">
           <motion.h2 

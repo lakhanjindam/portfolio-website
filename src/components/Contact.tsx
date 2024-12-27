@@ -3,7 +3,7 @@ import { Mail, Github, Linkedin } from 'lucide-react';
 
 const Contact = () => {
   return (
-    <section className="py-20 bg-gray-800" id="contact">
+    <section className="py-20 bg-gray-900/50 backdrop-blur-lg" id="contact">
       <div className="max-w-4xl mx-auto px-4">
         <motion.div
           className="text-center"

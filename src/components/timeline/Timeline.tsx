@@ -1,9 +1,8 @@
 import React, { useRef } from 'react';
 import { motion, useScroll } from 'framer-motion';
 import TimelineItem from './TimelineItem';
-import TimelineLine from './TimelineLine'; // Assuming TimelineLine is a separate component
+import TimelineLine from './TimelineLine';
 import { experiences } from '../../data';
-
 
 const Timeline: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -13,7 +12,7 @@ const Timeline: React.FC = () => {
   });
 
   return (
-    <section className="py-12 sm:py-20 bg-gray-900/50 backdrop-blur-sm" id="experience">
+    <section className="relative py-12 sm:py-20 bg-gray-800/50 backdrop-blur-lg overflow-hidden" id="experience">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" ref={containerRef}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}

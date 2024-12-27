@@ -23,7 +23,7 @@ export const CategoryItem: React.FC<SkillCategoryProps> = ({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group relative p-6 bg-gray-900/50 backdrop-blur-sm rounded-xl border border-white/5"
+      className="group relative p-6 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-white/5"
     >
       <div className="flex items-start gap-4">
         <div className="p-2 rounded-lg bg-emerald-500/10">
