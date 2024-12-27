@@ -3,15 +3,13 @@ import {  ArrowRight, Github, Linkedin } from 'lucide-react';
 import { BorderAnimation } from './BorderAnimation';
 import { Button } from './ui/Button';
 import { TerminalWindow } from './terminal/TerminalWindow';
-import { currentCompany, heroSectionDescription } from '../data';
+import { heroSectionDescription } from '../data';
 import './Hero.css'; // Import the CSS file for animations
 import { useEffect } from 'react';
-import HighlightedText from './HighlightedText';
 import CreativeTextAnimation from './creativeTextAnimation';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { FloatingNavBar } from './floatingNavbar';
 
-//NOTE: Add animation
 const Hero = () => {
   useEffect(() => {
     const nameElement = document.querySelector('.handwriting');
@@ -23,7 +21,9 @@ const Hero = () => {
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-gray-900 text-white px-4 overflow-hidden" id='home'>
       <FloatingNavBar />
-      <TerminalWindow />
+      {/* NOTE: disabled for now
+       <TerminalWindow /> 
+       */}
       <BorderAnimation />
       
       <div className="relative z-10 max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8">
@@ -54,9 +54,12 @@ const Hero = () => {
               </p>
               
               <p className="text-lg sm:text-xl text-gray-400 max-w-lg mx-auto lg:mx-0 cool-italic">
-                <em>{heroSectionDescription}</em>
-                {/* <HighlightedText text={currentCompany} /> */}
+                {heroSectionDescription}
               </p>
+              {/* <br />
+              <span className="font-normal text-base sm:text-lg md:text-xl font-mono">
+                Senior Software Engineer at <HighlightedText text={currentCompany} />
+              </span> */}
             </motion.div>
 
             <motion.div

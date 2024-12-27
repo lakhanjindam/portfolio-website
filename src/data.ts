@@ -21,6 +21,7 @@ interface Experience {
     company: string;
     duration: string;
     description: string;
+    companyURL: string;
 }
 
 // Interfaces for projects
@@ -34,7 +35,7 @@ interface Project {
 
 const currentCompany = 'Twilio';
 
-const heroSectionDescription = `My curiosity always drives me to tinker with computers and technology hence enabling me to pursue engineering.`
+const heroSectionDescription = `My curiosity always drives me to tinker with computers and technology hence enabling me to pursue software engineering.`
 
 // Sample data
 const experiences: Experience[] = [
@@ -42,13 +43,15 @@ const experiences: Experience[] = [
         duration: 'May 2022 - Present',
         title: 'Senior Software Engineer',
         company: 'Twilio',
-        description: `Building and developing cloud-native applications using Golang for Kuberenetes Ecosystem.`,
+        description: `Building and developing cloud-native applications using Golang in Kuberenetes Ecosystem.`,
+        companyURL: 'https://www.twilio.com/'
       },
       {
         duration: 'Aug 2020 - Apr 2022',
         title: 'Software Engineer',
         company: 'BrowserStack',
-        description: `Built, developed and managed Speedlab application and infrastructure for BrowserStack.`
+        description: `Built, developed and managed Speedlab application and infrastructure.`,
+        companyURL: 'https://www.browserstack.com/'
       },
 ];
 
