@@ -1,48 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
 
-.handwriting {
-  font-family: 'Dancing Script', cursive; /* Handwriting font */
-  font-size: 2.5rem; /* Adjust size as needed */
-  opacity: 0; /* Start invisible */
-  transform: translateY(20px); /* Start slightly below */
-  animation: handwriting 2s forwards; /* Animation duration and direction */
-}
-
-@keyframes handwriting {
-  to {
-    opacity: 1; /* Fade in */
-    transform: translateY(0); /* Move to normal position */
-  }
-}
-
-.handwriting {
-  opacity: 1; /* Start visible */
-}
-
-.svg-path {
-  animation: draw 4s forwards; /* Animation duration */
-}
-
-@keyframes draw {
-  to {
-    stroke-dashoffset: 0; /* Draw the path */
-  }
-}
-
-.rating-bar {
-  display: flex;
-}
-
-.star {
-  font-size: 1.5rem; /* Adjust size as needed */
-  color: gray; /* Default color for unfilled stars */
-  margin-right: 4px; /* Space between stars */
-}
-
-.star.filled {
-  color: gold; /* Color for filled stars */
-}
-
 .cool-italic {
     font-family: 'Playfair Display', serif;
     font-style: italic;

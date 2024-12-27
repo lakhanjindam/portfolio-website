@@ -19,15 +19,15 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-gray-900 text-white px-4 overflow-hidden" id='home'>
+    <div className="relative min-h-screen flex items-center justify-center bg-gray-900 text-white px-2 sm:px-4 py-8 sm:py-12 lg:py-20 overflow-hidden" id="home">
       <FloatingNavBar />
       {/* NOTE: disabled for now
        <TerminalWindow /> 
-       */}
-      <BorderAnimation />
+       */}  
+      {/* <BorderAnimation /> */}
       
-      <div className="relative z-10 max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8">
-        <div className="pt-16 lg:pt-0 grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      <div className="relative z-10 max-w-6xl mx-auto w-full px-2 sm:px-4 lg:px-8">
+        <div className="pt-16 lg:pt-0 grid lg:grid-cols-2 gap-6 lg:gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -38,10 +38,10 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
-              className="space-y-4"
+              className="space-y-2 sm:space-y-4"
             >
               <motion.h1
-                className="font-grotesk text-5xl sm:text-6xl md:text-7xl font-bold text-gradient"
+                className="font-grotesk text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-blue-500"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1}}
@@ -56,23 +56,19 @@ const Hero = () => {
               <p className="text-lg sm:text-xl text-gray-400 max-w-lg mx-auto lg:mx-0 cool-italic">
                 {heroSectionDescription}
               </p>
-              {/* <br />
-              <span className="font-normal text-base sm:text-lg md:text-xl font-mono">
-                Senior Software Engineer at <HighlightedText text={currentCompany} />
-              </span> */}
             </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mt-8"
+              className="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 sm:gap-4 mt-6 sm:mt-8"
             >
-              <Button href="#skills" variant="primary" className="group">
+              <Button href="#skills" variant="primary" className="group text-sm sm:text-base w-3/4 sm:w-auto mx-auto sm:mx-0">
                 <span>View My Skills</span>
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Button href="#contact" variant="secondary">  
+              <Button href="#contact" variant="secondary" className="text-sm sm:text-base w-3/4 sm:w-auto mx-auto sm:mx-0">
                 Get in Touch
               </Button>
             </motion.div>
@@ -81,7 +77,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
-              className="flex items-center justify-center lg:justify-start gap-6 mt-8"
+              className="flex items-center justify-center lg:justify-start gap-4 sm:gap-6 mt-6 sm:mt-8"
             >
               <a href="https://github.com/lakhanjindam" className="text-gray-400 hover:text-emerald-400 transition-colors">
                 <Github className="w-6 h-6" />
@@ -97,15 +93,13 @@ const Hero = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 2 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="relative lg:block"
+            className="relative max-w-[300px] sm:max-w-[300px] md:max-w-[400px] mx-auto lg:max-w-none top-8 lg:top-0"
           >
-            <div className="relative max-w-sm mx-auto lg:max-w-none">
             <DotLottieReact
               src="https://lottie.host/efc39ac5-f04a-467c-bf3d-758c507d68de/wkFIy80VoT.lottie"
               loop
               autoplay
             />
-            </div>
           </motion.div>
           
         </div>
