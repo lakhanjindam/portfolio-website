@@ -34,8 +34,7 @@ interface Project {
 
 const currentCompany = 'Twilio';
 
-const heroSectionDescription = `Specialized in building scalable microservices and distributed systems. 
-                Currently working on cloud-native applications at`
+const heroSectionDescription = `My curiosity always drives me to tinker with computers and technology hence enabling me to pursue engineering.`
 
 // Sample data
 const experiences: Experience[] = [

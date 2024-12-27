@@ -11,7 +11,7 @@ import CreativeTextAnimation from './creativeTextAnimation';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { FloatingNavBar } from './floatingNavbar';
 
-
+//NOTE: Add animation
 const Hero = () => {
   useEffect(() => {
     const nameElement = document.querySelector('.handwriting');
@@ -40,22 +40,22 @@ const Hero = () => {
               transition={{ delay: 0.2, duration: 0.8 }}
               className="space-y-4"
             >
-              <p>
-                <CreativeTextAnimation />
-              </p>
               <motion.h1
-                className="font-grotesk text-5xl sm:text-6xl md:text-7xl font-bold space-y-2 sm:space-y-3"
+                className="font-grotesk text-5xl sm:text-6xl md:text-7xl font-bold text-gradient"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1}}
-                style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+                style={{ fontFamily: 'Playfair Display, serif' }}
               >
-                <span className="block">Senior</span>
-                <span className="block text-gradient" style={{ paddingBottom: '0.1em' }}>Software Engineer</span>
+                Lakhan&nbsp;Jindam
               </motion.h1>
-              <p className="text-base sm:text-lg text-gray-400 max-w-lg mx-auto lg:mx-0">
-                {heroSectionDescription}
-                <HighlightedText text={currentCompany} />
+              <p>
+                <CreativeTextAnimation />
+              </p>
+              
+              <p className="text-lg sm:text-xl text-gray-400 max-w-lg mx-auto lg:mx-0 cool-italic">
+                <em>{heroSectionDescription}</em>
+                {/* <HighlightedText text={currentCompany} /> */}
               </p>
             </motion.div>
 

@@ -24,7 +24,7 @@ const Skills = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             Specialized in backend development with a focus on scalable architectures,
-            cloud infrastructure, and secure system design.
+            cloud infrastructure, and system design.
           </motion.p>
         </div>
 

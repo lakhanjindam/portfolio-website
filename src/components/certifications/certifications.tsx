@@ -37,7 +37,7 @@ const Certifications: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-gray-400 max-w-2xl mx-auto"
           >
-            Industry-recognized certifications demonstrating proficiency in cloud, DevOps, and system architecture.
+            Industry-recognized certifications demonstrating proficiency in Cloud, DevOps, and system architecture.
           </motion.p>
         </div>
 
