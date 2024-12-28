@@ -12,26 +12,7 @@ import {
   GitBranchIcon,
   Globe,
 } from 'lucide-react';
-import { Certification, SkillCategory, NavItem } from './types';
-
-
-// Interfaces for experience
-interface Experience {
-    title: string;
-    company: string;
-    duration: string;
-    description: string;
-    companyURL: string;
-}
-
-// Interfaces for projects
-interface Project {
-    title: string;
-    description: string;
-    tech: string[];
-    github: string;
-    live: string;
-}
+import { Certification, SkillCategory, NavItem, Experience, Project } from './types';
 
 const currentCompany = 'Twilio';
 

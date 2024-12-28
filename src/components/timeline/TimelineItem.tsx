@@ -2,7 +2,7 @@ import React from 'react';
 import { motion, MotionValue, useTransform } from 'framer-motion';
 import TimelineDot from './TimelineDot';
 import { cn } from '../../utils/cn';
-import HighlightedText from '../HighlightedText';
+import HighlightedText from '../ui/HighlightedText';
 import { TwilioLogo } from './twilioLogo';
 import { BrowserStackLogo } from './browserstackLogo';
 

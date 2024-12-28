@@ -6,6 +6,7 @@ import Certifications from './components/certifications/certifications';
 import Skills from './components/Skills';
 import ScrollToTop from './components/ScrollToTop';
 import { Analytics } from "@vercel/analytics/react"
+import Footer from './components/footer';
 
 const App: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ const App: React.FC = () => {
       <Skills />
       <Certifications />
       <Contact />
+      <Footer />
       <ScrollToTop />
     </div>
   );

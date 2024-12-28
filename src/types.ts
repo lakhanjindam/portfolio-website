@@ -35,4 +35,22 @@ interface NavItem {
   icon: React.ElementType;
 }
 
-export type { NavItem, Certification, SkillCategory, Skill, SkillGrade };
+// Interfaces for experience
+interface Experience {
+  title: string;
+  company: string;
+  duration: string;
+  description: string;
+  companyURL: string;
+}
+
+// Interfaces for projects
+interface Project {
+  title: string;
+  description: string;
+  tech: string[];
+  github: string;
+  live: string;
+}
+
+export type { NavItem, Certification, SkillCategory, Skill, SkillGrade, Experience, Project };

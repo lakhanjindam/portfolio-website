@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 import {  ArrowRight, Github, Linkedin } from 'lucide-react';
 import { BorderAnimation } from './BorderAnimation';
 import { Button } from './ui/Button';
-import { TerminalWindow } from './terminal/TerminalWindow';
 import { heroSectionDescription } from '../data';
 import './Hero.css'; // Import the CSS file for animations
 import { useEffect } from 'react';
