@@ -12,7 +12,7 @@ const Contact = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl font-bold text-white mb-8">Get In Touch</h2>
+          <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-500 to-blue-500 mb-8">Get In Touch</h2>
           <p className="text-gray-400 mb-12 text-lg">
             Whether you have a good opportunity, a question, or just want to say hi,
             please don&apos;t hesitate to reach out to me.

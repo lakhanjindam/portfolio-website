@@ -1,13 +1,30 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import './floatingNavbar.css'
 import { navItems } from '../data'
 
-
 export function FloatingNavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
+  const menuRef = useRef<HTMLDivElement>(null)
+  const buttonRef = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        menuRef.current && 
+        buttonRef.current && 
+        !menuRef.current.contains(event.target as Node) && 
+        !buttonRef.current.contains(event.target as Node)
+      ) {
+        setIsMenuOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
 
   const handleClick = (href: string) => {
     setIsMenuOpen(false)
@@ -39,6 +56,7 @@ export function FloatingNavBar() {
         transition={{ duration: 0.5 }}
       >
         <motion.button
+          ref={buttonRef}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="menu-button"
           aria-label="Toggle menu"
@@ -76,6 +94,7 @@ export function FloatingNavBar() {
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
+              ref={menuRef}
               className="nav-blob"
               initial="closed"
               animate="open"
@@ -136,4 +155,3 @@ export function FloatingNavBar() {
     </div>
   )
 }
-
