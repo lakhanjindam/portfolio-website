@@ -16,7 +16,9 @@ import { Certification, SkillCategory, NavItem, Experience, Project } from './ty
 
 const currentCompany = 'Twilio';
 
-const heroSectionDescription = `My curiosity always drives me to tinker with computers and technology hence enabling me to pursue software engineering.`
+const heroSectionDescription = `My curiosity always drives me to tinker with computers and technology hence enabling me to pursue software engineering.
+
+                                While Off-screen I like to travel and play video games.`
 
 // Sample data
 const experiences: Experience[] = [
@@ -24,7 +26,7 @@ const experiences: Experience[] = [
         duration: 'May 2022 - Present',
         title: 'Senior Software Engineer',
         company: 'Twilio',
-        description: `Building and developing cloud-native applications using Golang in Kuberenetes Ecosystem.`,
+        description: `Building and developing cloud-native applications using Golang in Kuberenetes Ecosystem for a reliable communication platform.`,
         companyURL: 'https://www.twilio.com/'
       },
       {
@@ -34,6 +36,20 @@ const experiences: Experience[] = [
         description: `Built, developed and managed Speedlab application and infrastructure.`,
         companyURL: 'https://www.browserstack.com/'
       },
+      // {
+      //   duration: 'July 2016 - July 2020',
+      //   title: 'Graduate Student',
+      //   company: 'Xavier Institute of Engineering',
+      //   description: `Completed my Bachelor's degree in Information Technology.`,
+      //   companyURL: 'https://www.xavier.ac.in/'
+      // },
+      // {
+      //   duration: 'May 2014 - May 2016',
+      //   title: 'High School',
+      //   company: 'KJ Somaiya College of Science & Commerce',
+      //   description: `Completed my high school education in Science and Commerce.`,
+      //   companyURL: 'https://kjssc.somaiya.edu.in/en'
+      // }
 ];
 
 // NOTE: not used currently

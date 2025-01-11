@@ -76,7 +76,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
           </div>
           <ul className="text-gray-400 text-sm sm:text-base space-y-2">
             {description.split('\n').map((line, idx) => (
-              <li key={idx} className="flex items-start gap-2 p-2 hover:bg-gray-800 transition-colors">
+              <li key={idx} className="flex items-start gap-2 p-2 hover:bg-gray-800 transition-colors text-left">
                 <span className="text-emerald-400">➜</span>
                 <span>{line}</span>
               </li>
