@@ -16,9 +16,7 @@ import { Certification, SkillCategory, NavItem, Experience, Project } from './ty
 
 const currentCompany = 'Twilio';
 
-const heroSectionDescription = `My curiosity always drives me to tinker with computers and technology hence enabling me to pursue software engineering.
-
-                                While Off-screen I like to travel and play video games.`
+const heroSectionDescription = `My curiosity always drives me to tinker with computers and technology hence enabling me to pursue software engineering.`
 
 // Sample data
 const experiences: Experience[] = [
@@ -26,7 +24,7 @@ const experiences: Experience[] = [
         duration: 'May 2022 - Present',
         title: 'Senior Software Engineer',
         company: 'Twilio',
-        description: `Building and developing cloud-native applications using Golang in Kuberenetes Ecosystem for a reliable communication platform.`,
+        description: `Developing cloud-native communication platforms using Golang and Kubernetes, focusing on reliability and scalable solutions.`,
         companyURL: 'https://www.twilio.com/'
       },
       {

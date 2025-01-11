@@ -15,7 +15,6 @@ import {
 } from "framer-motion";
 import { Stars } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { TextEffect } from './ui/text-effect';
 import { TextShimmer } from './ui/text-shimmer';
 
 const socialLinks = [
@@ -38,8 +37,6 @@ const Hero = () => {
   }, []);
 
   const backgroundImage = useMotionTemplate`radial-gradient(125% 125% at 50% 0%, #020617 50%, ${color})`;
-  const border = useMotionTemplate`1px solid ${color}`;
-  const boxShadow = useMotionTemplate`0px 4px 24px ${color}`;
 
   return (
     <motion.section
@@ -74,7 +71,7 @@ const Hero = () => {
               >
                 <TextShimmer
                   duration={5}
-                  className='[--base-color:theme(colors.blue.600)] [--base-gradient-color:theme(colors.blue.200)] dark:[--base-color:theme(colors.blue.700)] dark:[--base-gradient-color:theme(colors.blue.400)]'
+                  className='[--base-color:theme(colors.blue.600)] [--base-gradient-color:theme(colors.blue.100)] dark:[--base-color:theme(colors.blue.700)] dark:[--base-gradient-color:theme(colors.blue.400)]'
                 >
                   Lakhan Jindam
                 </TextShimmer>
@@ -119,7 +116,7 @@ const Hero = () => {
           </motion.div>
 
 
-          {/* <motion.div
+          <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 2 }}
             transition={{ delay: 0.3, duration: 0.8 }}
@@ -130,7 +127,7 @@ const Hero = () => {
               loop
               autoplay
             />
-          </motion.div> */}
+          </motion.div>
           
         </div>
       </div>
