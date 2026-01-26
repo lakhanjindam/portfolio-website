@@ -21,15 +21,13 @@ export default async function handler(request: VercelRequest, response: VercelRe
         }
 
         // 2. Get Recently Played Games (to find what we are playing or played last)
-        // Note: GetPlayerSummaries also returns 'gameextrainfo' if currently playing, but GetRecentlyPlayedGames gives us better image assets (hash) usually.
-        // However, GetPlayerSummaries is the most reliable for "Real-time" status.
-
-        // Let's rely on GetPlayerSummaries for "Current Status"
+        // Note: GetPlayerSummaries also returns 'gameextrainfo' if currently playing.
         const isPlaying = !!player.gameextrainfo;
         const gameName = player.gameextrainfo || "Not Playing";
         const gameLink = player.gameid ? `https://store.steampowered.com/app/${player.gameid}/` : "#";
 
         let gameImage = "";
+        let hoursPlayed = "";
 
         if (isPlaying && player.gameid) {
             // If playing, try to get image from Recently Played to get the logo/icon
@@ -41,15 +39,31 @@ export default async function handler(request: VercelRequest, response: VercelRe
             const recentGame = recentData.response?.games?.find((g: any) => g.appid.toString() === player.gameid);
 
             if (recentGame) {
-                // Construct image URL from hash
-                // Format: http://media.steampowered.com/steamcommunity/public/images/apps/{appid}/{hash}.jpg
-                gameImage = `http://media.steampowered.com/steamcommunity/public/images/apps/${player.gameid}/${recentGame.img_icon_url}.jpg`;
-                // Prefer library hero if possible, but we don't get that from this API easily without looking up store assets.
-                // Let's use the steam store header image which is predictable: 
+                // Construct image URL from hash if available, or fall back to store header
+                // Custom logic: prefer store header for consistency
                 gameImage = `https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${player.gameid}/header.jpg`;
+
+                if (recentGame.playtime_forever) {
+                    hoursPlayed = Math.round(recentGame.playtime_forever / 60).toString();
+                }
             } else {
-                // Fallback to header image guess
                 gameImage = `https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${player.gameid}/header.jpg`;
+
+                // Fallback: Try GetOwnedGames with filter for this specific game
+                try {
+                    const ownedRes = await fetch(
+                        `http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${STEAM_API_KEY}&steamid=${STEAM_ID}&include_appinfo=1&input_json=${encodeURIComponent(JSON.stringify({ appids_filter: [parseInt(player.gameid)] }))}`
+                    );
+                    const ownedData = await ownedRes.json();
+                    if (ownedData.response && ownedData.response.games && ownedData.response.games.length > 0) {
+                        const ownedGame = ownedData.response.games[0];
+                        if (ownedGame.playtime_forever) {
+                            hoursPlayed = Math.round(ownedGame.playtime_forever / 60).toString();
+                        }
+                    }
+                } catch (e) {
+                    console.error("Fallback fetch failed", e);
+                }
             }
         }
 
@@ -59,6 +73,7 @@ export default async function handler(request: VercelRequest, response: VercelRe
                 name: gameName,
                 image: gameImage,
                 link: gameLink,
+                hoursPlayed
             },
             steamUrl: player.profileurl,
             status: player.personastate // 0 - Offline, 1 - Online, 2 - Busy, etc.

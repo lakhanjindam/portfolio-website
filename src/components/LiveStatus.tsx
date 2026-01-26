@@ -147,6 +147,15 @@ const TiltCard = ({ item, isActive, isWatchingTab = false }: {
                         </div>
                     )}
 
+                    {/* Hours Played - Steam/Gaming */}
+                    {item.hoursPlayed && (
+                        <div className="flex items-center gap-3 mb-4 text-sm">
+                            <span className="flex items-center gap-1 px-2.5 py-1 bg-blue-500/20 border border-blue-500/30 rounded-lg text-blue-300 font-semibold">
+                                ⌛ {item.hoursPlayed} Hours
+                            </span>
+                        </div>
+                    )}
+
                     {/* Action Links */}
                     <div className="flex flex-wrap items-center gap-3">
                         {/* Streaming Platform - Only for Watching tab */}
@@ -310,7 +319,8 @@ const LiveStatus = () => {
                                 subtitle: "Currently Playing",
                                 image: data.game.image || item.image,
                                 link: data.game.link,
-                                tags: ["Steam", "Live Status", "PC"]
+                                tags: ["Steam", "Live Status", "PC"],
+                                hoursPlayed: data.game.hoursPlayed
                             };
                         }
                         return item;

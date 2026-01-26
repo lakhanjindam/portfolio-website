@@ -83,6 +83,7 @@ interface LiveStatusContent {
   };
   episodes?: number; // Total episodes or current count
   airingStatus?: string; // e.g., "Currently Airing", "Finished"
+  hoursPlayed?: string | number; // Total hours played
 }
 
 export type { NavItem, Certification, SkillCategory, Skill, SkillGrade, Experience, Project, LiveStatusItem, LiveStatusContent };
