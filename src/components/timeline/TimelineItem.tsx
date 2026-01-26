@@ -5,6 +5,7 @@ import { cn } from '../../utils/cn';
 import HighlightedText from '../ui/HighlightedText';
 import { TwilioLogo } from './twilioLogo';
 import { BrowserStackLogo } from './browserstackLogo';
+import { TalkdeskLogo } from './talkdeskLogo';
 
 interface TimelineItemProps {
   duration: string;
@@ -17,11 +18,11 @@ interface TimelineItemProps {
   companyURL: string;
 }
 
-const TimelineItem: React.FC<TimelineItemProps> = ({ 
-  duration, 
-  title, 
-  company, 
-  description, 
+const TimelineItem: React.FC<TimelineItemProps> = ({
+  duration,
+  title,
+  company,
+  description,
   index,
   progress,
   total,
@@ -71,6 +72,11 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
             {company?.toLowerCase().includes('browserstack') && (
               <div className="overflow-hidden rounded-full w-8 h-8">
                 <BrowserStackLogo className="w-8 h-8" />
+              </div>
+            )}
+            {company?.toLowerCase().includes('talkdesk') && (
+              <div className="overflow-hidden rounded-full w-8 h-8">
+                <TalkdeskLogo className="w-8 h-8" />
               </div>
             )}
           </div>

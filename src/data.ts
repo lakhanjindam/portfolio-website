@@ -21,7 +21,14 @@ const heroSectionDescription = `My curiosity always drives me to tinker with com
 // Sample data
 const experiences: Experience[] = [
     {
-        duration: 'May 2022 - Present',
+        duration: 'July 2025 - Present',
+        title: 'Senior Software Engineer',
+        company: 'Talkdesk',
+        description: `Currently working as a Senior Software Engineer at Talkdesk.`,
+        companyURL: 'https://www.talkdesk.com/'
+      },
+    {
+        duration: 'May 2022 - July 2025',
         title: 'Senior Software Engineer',
         company: 'Twilio',
         description: `Developing cloud-native communication platforms using Golang and Kubernetes, focusing on reliability and scalable solutions.`,

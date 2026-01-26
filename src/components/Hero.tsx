@@ -16,6 +16,7 @@ import {
 import { Stars } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { TextShimmer } from './ui/text-shimmer';
+import { GlassButton } from './ui/GlassButton';
 
 const socialLinks = [
   { href: "https://github.com/lakhanjindam", icon: Github, label: "GitHub", color: 'emerald' },
