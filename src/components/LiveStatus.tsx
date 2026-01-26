@@ -7,6 +7,7 @@ import { ExternalLink, ArrowLeft, ArrowRight } from 'lucide-react';
 import Carousel from 'react-spring-3d-carousel';
 import { config } from 'react-spring';
 import crunchyrollLogo from '../images/crunchyroll.png';
+import steamLogo from '../images/steam.png';
 
 const TiltCard = ({ item, isActive, isWatchingTab = false }: {
     item: LiveStatusContent & { color: string },
@@ -95,24 +96,24 @@ const TiltCard = ({ item, isActive, isWatchingTab = false }: {
                 </div>
 
                 {/* Content Overlay */}
-                <div className="absolute inset-x-0 bottom-0 p-6 md:p-10 flex flex-col justify-end items-start text-left transform-style-3d translate-z-10 z-30">
+                <div className="absolute inset-x-0 bottom-0 p-4 md:p-10 flex flex-col justify-end items-start text-left transform-style-3d translate-z-10 z-30">
 
                     {/* Tags */}
                     {item.tags && (
-                        <div className="flex flex-wrap gap-2 mb-4">
+                        <div className="flex flex-wrap gap-2 mb-2 md:mb-4">
                             {item.tags.map((tag: string, i: number) => (
-                                <span key={i} className="px-3 py-1 bg-white/10 backdrop-blur-md border border-white/10 rounded-lg text-xs font-medium text-white/90">
+                                <span key={i} className="px-2.5 py-0.5 md:px-3 md:py-1 bg-white/10 backdrop-blur-md border border-white/10 rounded-lg text-[10px] md:text-xs font-medium text-white/90">
                                     {tag}
                                 </span>
                             ))}
                         </div>
                     )}
 
-                    <div className="space-y-1 mb-4">
-                        <span className={`text-xs md:text-sm font-bold tracking-wider uppercase ${item.color || 'text-gray-400'}`}>
+                    <div className="space-y-1 mb-2 md:mb-4">
+                        <span className={`text-[10px] md:text-sm font-bold tracking-wider uppercase ${item.color || 'text-gray-400'}`}>
                             {item.subtitle}
                         </span>
-                        <h3 className="text-2xl md:text-4xl font-bold text-white">
+                        <h3 className="text-base md:text-xl font-bold text-white line-clamp-2">
                             {item.title}
                         </h3>
                     </div>
@@ -175,8 +176,17 @@ const TiltCard = ({ item, isActive, isWatchingTab = false }: {
                                     : 'bg-white text-gray-950 hover:bg-gray-100'
                                     }`}
                             >
-                                {isWatchingTab ? 'MAL' : 'Details'}
-                                <ExternalLink className="w-4 h-4" />
+                                {item.id === 'gaming' ? (
+                                    <>
+                                        <img src={steamLogo} alt="Steam" className="w-5 h-5 object-contain" />
+                                        Steam
+                                    </>
+                                ) : (
+                                    <>
+                                        {isWatchingTab ? 'MAL' : 'Details'}
+                                        <ExternalLink className="w-4 h-4" />
+                                    </>
+                                )}
                             </motion.a>
                         )}
                     </div>
@@ -351,7 +361,7 @@ const LiveStatus = () => {
 
 
     return (
-        <section className="relative py-20 px-4 overflow-hidden">
+        <section className="relative py-20 px-4 overflow-hidden" id="live-status">
 
             {/* Background Decor */}
             <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] ${glowColor}/10 blur-[120px] rounded-full pointer-events-none transition-colors duration-700`} />

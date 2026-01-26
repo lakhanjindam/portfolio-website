@@ -221,6 +221,7 @@ const certifications: Certification[] = [
 
 const navItems: NavItem[] = [
   { name: 'Home', href: '#home', icon: User },
+  { name: 'Currently', href: '#live-status', icon: Gamepad2 },
   { name: 'Experience', href: '#experience', icon: Briefcase },
   { name: 'Skills', href: '#skills', icon: Star },
   { name: 'Certifications', href: '#certifications', icon: Medal },
