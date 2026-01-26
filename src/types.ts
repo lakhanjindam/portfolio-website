@@ -74,6 +74,15 @@ interface LiveStatusContent {
   link?: string;
   tags: string[];
   id?: string; // Optional ID for internal tracking if needed
+  malId?: number; // MyAnimeList ID for fetching live ratings via Jikan API
+  rating?: number; // e.g., MAL score like 8.5
+  season?: string; // e.g., "Season 2", "Final Season"
+  streamingPlatform?: {
+    name: string; // e.g., "Crunchyroll", "Netflix"
+    url: string;  // Link to the anime page on that platform
+  };
+  episodes?: number; // Total episodes or current count
+  airingStatus?: string; // e.g., "Currently Airing", "Finished"
 }
 
 export type { NavItem, Certification, SkillCategory, Skill, SkillGrade, Experience, Project, LiveStatusItem, LiveStatusContent };

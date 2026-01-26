@@ -38,4 +38,3 @@ export function BrowserStackLogo({ width = 800, height = 800, className = '' }: 
     </svg>
   )
 }
-

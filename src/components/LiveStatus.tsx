@@ -2,11 +2,17 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { liveStatus } from '../data';
-import { ExternalLink } from 'lucide-react';
+import { LiveStatusItem, LiveStatusContent } from '../types';
+import { ExternalLink, ArrowLeft, ArrowRight } from 'lucide-react';
 import Carousel from 'react-spring-3d-carousel';
 import { config } from 'react-spring';
+import crunchyrollLogo from '../images/crunchyroll.png';
 
-const TiltCard = ({ item, isActive }: { item: any, isActive: boolean }) => {
+const TiltCard = ({ item, isActive, isWatchingTab = false }: {
+    item: LiveStatusContent & { color: string },
+    isActive: boolean,
+    isWatchingTab?: boolean
+}) => {
     // 3D Tilt Logic
     const x = useMotionValue(0);
     const y = useMotionValue(0);
@@ -46,13 +52,14 @@ const TiltCard = ({ item, isActive }: { item: any, isActive: boolean }) => {
             }}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className={`relative w-[400px] md:w-[700px] aspect-video md:aspect-[2/1] group ${isActive ? 'cursor-pointer' : 'cursor-default pointer-events-none'}`}
+            className={`relative w-[90vw] md:w-[700px] aspect-[16/10] md:aspect-[2/1] group ${isActive ? 'cursor-pointer' : 'cursor-default pointer-events-none'
+                }`}
         >
             {/* Outer Glow - Behind the card from all 4 corners */}
             <div
                 className={`absolute -inset-3 rounded-[2rem] blur-2xl transition-all duration-500 will-change-transform opacity-0 ${isActive ? 'group-hover:opacity-60' : ''} ${item.color.includes('emerald') ? 'bg-emerald-500' :
-                        item.color.includes('blue') ? 'bg-blue-500' :
-                            item.color.includes('purple') ? 'bg-purple-500' : 'bg-emerald-500'
+                    item.color.includes('blue') ? 'bg-blue-500' :
+                        item.color.includes('purple') ? 'bg-purple-500' : 'bg-emerald-500'
                     }`}
                 style={{ transform: 'translateZ(-20px)' }}
             />
@@ -61,16 +68,34 @@ const TiltCard = ({ item, isActive }: { item: any, isActive: boolean }) => {
             <div className={`relative h-full w-full rounded-3xl bg-gray-900 border border-gray-800 shadow-2xl overflow-hidden isolate [-webkit-mask-image:radial-gradient(white,black)] transition-all duration-500 ${!isActive ? 'opacity-50' : ''}`}>
                 {/* Background Image */}
                 <div className="absolute inset-0">
-                    <img
-                        src={item.image}
-                        alt={item.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-900/60 to-transparent" />
+                    {isWatchingTab ? (
+                        <>
+                            {/* Blurred Background for Fill */}
+                            <img
+                                src={item.image}
+                                alt=""
+                                className="absolute inset-0 w-full h-full object-cover blur-xl opacity-50 scale-110"
+                                aria-hidden="true"
+                            />
+                            {/* Main Image Contained */}
+                            <img
+                                src={item.image}
+                                alt={item.title}
+                                className="relative w-full h-full object-contain z-10 transition-transform duration-700 group-hover:scale-105"
+                            />
+                        </>
+                    ) : (
+                        <img
+                            src={item.image}
+                            alt={item.title}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-900/60 to-transparent z-20" />
                 </div>
 
                 {/* Content Overlay */}
-                <div className="absolute inset-x-0 bottom-0 p-6 md:p-10 flex flex-col justify-end items-start text-left transform-style-3d translate-z-10">
+                <div className="absolute inset-x-0 bottom-0 p-6 md:p-10 flex flex-col justify-end items-start text-left transform-style-3d translate-z-10 z-30">
 
                     {/* Tags */}
                     {item.tags && (
@@ -83,7 +108,7 @@ const TiltCard = ({ item, isActive }: { item: any, isActive: boolean }) => {
                         </div>
                     )}
 
-                    <div className="space-y-1 mb-6">
+                    <div className="space-y-1 mb-4">
                         <span className={`text-xs md:text-sm font-bold tracking-wider uppercase ${item.color || 'text-gray-400'}`}>
                             {item.subtitle}
                         </span>
@@ -92,20 +117,69 @@ const TiltCard = ({ item, isActive }: { item: any, isActive: boolean }) => {
                         </h3>
                     </div>
 
-                    {/* Action Link */}
-                    {item.link && (
-                        <motion.a
-                            href={item.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-gray-950 rounded-xl font-semibold text-sm hover:bg-gray-100 transition-colors"
-                        >
-                            View Details
-                            <ExternalLink className="w-4 h-4" />
-                        </motion.a>
+                    {/* Rating & Season Info - Only for Watching tab */}
+                    {isWatchingTab && (item.rating || item.season) && (
+                        <div className="flex items-center gap-3 mb-4 text-sm">
+                            {item.rating && (
+                                <span className="flex items-center gap-1 px-2.5 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-lg text-yellow-400 font-semibold">
+                                    ⭐ {item.rating.toFixed(1)}
+                                </span>
+                            )}
+                            {item.season && (
+                                <span className="px-2.5 py-1 bg-purple-500/20 border border-purple-500/30 rounded-lg text-purple-300 font-medium">
+                                    {item.season}
+                                </span>
+                            )}
+                            {item.episodes && (
+                                <span className="px-2.5 py-1 bg-blue-500/20 border border-blue-500/30 rounded-lg text-blue-300 font-medium">
+                                    {item.episodes} EPS
+                                </span>
+                            )}
+                            {item.airingStatus && (
+                                <span className={`px-2.5 py-1 rounded-lg font-medium border ${item.airingStatus === 'Currently Airing'
+                                    ? 'bg-green-500/20 border-green-500/30 text-green-300'
+                                    : 'bg-gray-500/20 border-gray-500/30 text-gray-300'
+                                    }`}>
+                                    {item.airingStatus === 'Currently Airing' ? 'Airing' : 'Fused'}
+                                </span>
+                            )}
+                        </div>
                     )}
+
+                    {/* Action Links */}
+                    <div className="flex flex-wrap items-center gap-3">
+                        {/* Streaming Platform - Only for Watching tab */}
+                        {isWatchingTab && item.streamingPlatform && (
+                            <motion.a
+                                href={item.streamingPlatform.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="inline-flex items-center gap-2 px-4 py-2 bg-white text-gray-950 rounded-xl font-semibold text-sm hover:bg-gray-100 transition-colors"
+                            >
+                                <img src={crunchyrollLogo} alt="Crunchyroll" className="w-5 h-5 object-contain" />
+                                {item.streamingPlatform.name}
+                            </motion.a>
+                        )}
+                        {/* Generic View Link */}
+                        {item.link && (
+                            <motion.a
+                                href={item.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl font-semibold text-sm transition-colors ${isWatchingTab
+                                    ? 'bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20'
+                                    : 'bg-white text-gray-950 hover:bg-gray-100'
+                                    }`}
+                            >
+                                {isWatchingTab ? 'MAL' : 'Details'}
+                                <ExternalLink className="w-4 h-4" />
+                            </motion.a>
+                        )}
+                    </div>
                 </div>
 
                 {/* Shine Effect */}
@@ -130,6 +204,85 @@ const LiveStatus = () => {
     // Get color for background glow
     const glowColor = activeItem.color ? activeItem.color.replace('text-', 'bg-').replace('400', '500') : 'bg-blue-500';
 
+    // Adjust carousel config based on screen size
+    useEffect(() => {
+        const handleResize = () => {
+            const width = window.innerWidth;
+            if (width < 768) {
+                setCarouselState(prev => ({ ...prev, offsetRadius: 1 }));
+            } else {
+                setCarouselState(prev => ({ ...prev, offsetRadius: 2 }));
+            }
+        };
+
+        handleResize(); // Initial check
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    // Fetch Anime Data from Jikan API for Watching tab
+    useEffect(() => {
+        const fetchAnimeData = async () => {
+            const watchingItem = statusData.find(item => item.id === 'watching');
+            if (!watchingItem?.subItems) return;
+
+            // Collect all MAL IDs that need fetching
+            // We fetch if we have a malId, regardless of if we have data already, to ensure freshness (or at least image updates)
+            // But to save requests, let's only fetch if missing rating OR image is the placeholder/static one?
+            // Actually, static images are fine, but user asked to utilise jpg from jikan.
+            // Let's just fetch all items with malId to populate dynamic fields.
+            const itemsWithMalId = watchingItem.subItems.filter(item => item.malId);
+            if (itemsWithMalId.length === 0) return;
+
+            // Fetch data for each anime (with rate limiting - Jikan has 3 req/sec limit)
+            const updatedSubItems = [...watchingItem.subItems];
+
+            for (let i = 0; i < itemsWithMalId.length; i++) {
+                const item = itemsWithMalId[i];
+                // Skip if we already fetched dynamic data (optimization: check if episodes is set, as it wasn't there before)
+                if (item.episodes) continue;
+
+                try {
+                    // Add delay for rate limiting (350ms between requests)
+                    if (i > 0) await new Promise(r => setTimeout(r, 350));
+
+                    const res = await fetch(`https://api.jikan.moe/v4/anime/${item.malId}`);
+                    if (res.ok) {
+                        const data = await res.json();
+                        const anime = data.data;
+
+                        if (anime) {
+                            // Find and update the item in our array
+                            const idx = updatedSubItems.findIndex(si => si.malId === item.malId);
+                            if (idx !== -1) {
+                                updatedSubItems[idx] = {
+                                    ...updatedSubItems[idx],
+                                    rating: anime.score ?? updatedSubItems[idx].rating, // Use nullish coalescing to keep fallback if API null
+                                    image: anime.images?.jpg?.large_image_url || updatedSubItems[idx].image,
+                                    episodes: anime.episodes,
+                                    airingStatus: anime.status,
+                                    title: anime.title_english || anime.title || updatedSubItems[idx].title
+                                };
+                            }
+                        }
+                    }
+                } catch {
+                    // Silently fail for individual items
+                }
+            }
+
+            // Update state with fetched data
+            setStatusData(prev => prev.map(item => {
+                if (item.id === 'watching') {
+                    return { ...item, subItems: updatedSubItems };
+                }
+                return item;
+            }));
+        };
+
+        fetchAnimeData();
+    }, []); // Run once on mount
+
     // Fetch Steam Data (Same logic as before)
     useEffect(() => {
         const fetchSteamData = async () => {
@@ -153,7 +306,7 @@ const LiveStatus = () => {
                         return item;
                     }));
                 }
-            } catch (error) {
+            } catch {
                 // Silently fail in dev
             }
         };
@@ -165,16 +318,25 @@ const LiveStatus = () => {
     // Prepare slides for react-spring-3d-carousel
     const itemsToShow = activeItem.subItems && activeItem.subItems.length > 0 ? activeItem.subItems : [activeItem];
 
+    // Fix for 2 items: Duplicate them to create a 4-item carousel for better 3D effect
+    const renderedItems = itemsToShow.length === 2 ? [...itemsToShow, ...itemsToShow] : itemsToShow;
+
     // We need to maintain stable keys strictly, so we'll wrap this in a way that key depends on index/id
-    const slides = itemsToShow.map((item: any, index: number) => {
+    const isWatchingTab = activeTabId === 'watching';
+
+    const slides = renderedItems.map((item: LiveStatusItem | LiveStatusContent, index: number) => {
         const isActive = index === carouselState.goToSlide;
+        // Check if item has color property (is LiveStatusItem), otherwise use activeItem.color
+        const itemColor = 'color' in item ? item.color : activeItem.color;
+
         return {
             key: `${activeTabId}-${index}`, // Stable key based on tab and index
             content: (
                 <div onClick={() => setCarouselState({ ...carouselState, goToSlide: index })}>
                     <TiltCard
-                        item={{ ...item, color: item.color || activeItem.color }}
+                        item={{ ...item, color: itemColor }}
                         isActive={isActive}
+                        isWatchingTab={isWatchingTab}
                     />
                 </div>
             ),
@@ -211,12 +373,13 @@ const LiveStatus = () => {
                         <span className="text-sm font-medium text-gray-300 tracking-wide uppercase">Live Status</span>
                     </motion.div>
 
+
                     <motion.h2
-                        initial={{ opacity: 0, y: 10 }}
+                        initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
-                        className="text-3xl md:text-5xl font-bold text-white tracking-tight"
+                        transition={{ duration: 0.6 }}
+                        className="text-3xl font-grotesk font-bold text-gradient mb-3 sm:text-4xl"
                     >
                         Currently
                     </motion.h2>
@@ -248,7 +411,7 @@ const LiveStatus = () => {
                 </div>
 
                 {/* Content Area */}
-                <div className="flex justify-center min-h-[500px]">
+                <div className="flex justify-center min-h-[350px] md:min-h-[500px]">
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={activeTabId}
@@ -256,9 +419,9 @@ const LiveStatus = () => {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.3 }}
-                            className="w-full h-[500px] relative" // Fixed height for carousel
+                            className="w-full h-[350px] md:h-[500px] relative" // Fixed height for carousel
                         >
-                            {itemsToShow.length > 1 ? (
+                            {renderedItems.length > 1 ? (
                                 <Carousel
                                     slides={slides}
                                     goToSlide={carouselState.goToSlide}
@@ -268,7 +431,39 @@ const LiveStatus = () => {
                                 />
                             ) : (
                                 <div className="flex justify-center items-center h-full">
-                                    <TiltCard item={activeItem} isActive={true} />
+                                    <TiltCard item={activeItem} isActive={true} isWatchingTab={isWatchingTab} />
+                                </div>
+                            )}
+
+                            {/* Mobile Navigation Controls */}
+                            {renderedItems.length > 1 && (
+                                <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 z-20 flex justify-between px-2 md:hidden pointer-events-none">
+                                    <button
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            setCarouselState(prev => ({
+                                                ...prev,
+                                                goToSlide: (prev.goToSlide - 1 + renderedItems.length) % renderedItems.length
+                                            }));
+                                        }}
+                                        className="pointer-events-auto p-3 bg-gray-900/80 backdrop-blur-md border border-gray-700 rounded-full text-white/90 hover:text-white shadow-lg transition-transform active:scale-95"
+                                        aria-label="Previous slide"
+                                    >
+                                        <ArrowLeft className="w-5 h-5" />
+                                    </button>
+                                    <button
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            setCarouselState(prev => ({
+                                                ...prev,
+                                                goToSlide: (prev.goToSlide + 1) % renderedItems.length
+                                            }));
+                                        }}
+                                        className="pointer-events-auto p-3 bg-gray-900/80 backdrop-blur-md border border-gray-700 rounded-full text-white/90 hover:text-white shadow-lg transition-transform active:scale-95"
+                                        aria-label="Next slide"
+                                    >
+                                        <ArrowRight className="w-5 h-5" />
+                                    </button>
                                 </div>
                             )}
                         </motion.div>
