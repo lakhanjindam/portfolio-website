@@ -253,13 +253,57 @@ const liveStatus: LiveStatusItem[] = [
   {
     id: "watching",
     tabLabel: "Watching",
-    title: "Arcane Season 2",
-    subtitle: "Netflix Series",
-    image: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=2525&auto=format&fit=crop", // placeholder: cinematic/neon
-    link: "https://www.netflix.com/title/81435684",
+    title: "Sentenced to Be a Hero",
+    subtitle: "Anime Series",
+    image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=2670&auto=format&fit=crop", // Safe placeholder for anime
+    link: "https://myanimelist.net/anime/55830/Yuusha_Kei_ni_Shosu_Choubatsu_Yuusha_9004-tai_no_Keimu_Kiroku",
     icon: Tv,
     color: "text-purple-400",
-    tags: ["Sci-Fi", "Animation", "Masterpiece"]
+    tags: ["Fantasy", "Action", "Hero"],
+    subItems: [
+      {
+        title: "Sentenced to Be a Hero",
+        subtitle: "Anime Series",
+        image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=2670&auto=format&fit=crop",
+        link: "https://myanimelist.net/anime/55830/Yuusha_Kei_ni_Shosu_Choubatsu_Yuusha_9004-tai_no_Keimu_Kiroku",
+        tags: ["Fantasy", "Action", "Hero"]
+      },
+      {
+        title: "Jujutsu Kaisen",
+        subtitle: "Anime Series",
+        image: "https://images.unsplash.com/photo-1613376023733-0a73315d9b06?q=80&w=2670&auto=format&fit=crop",
+        link: "https://www.crunchyroll.com/series/GRDV0019R/jujutsu-kaisen",
+        tags: ["Supernatural", "Action", "Shounen"]
+      },
+      {
+        title: "Arcane Season 2",
+        subtitle: "Netflix Series",
+        image: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=2525&auto=format&fit=crop",
+        link: "https://www.netflix.com/title/81435684",
+        tags: ["Sci-Fi", "Animation", "Masterpiece"]
+      },
+      {
+        title: "Sentenced to Be a Hero",
+        subtitle: "Anime Series",
+        image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=2670&auto=format&fit=crop",
+        link: "https://myanimelist.net/anime/55830/Yuusha_Kei_ni_Shosu_Choubatsu_Yuusha_9004-tai_no_Keimu_Kiroku",
+        tags: ["Fantasy", "Action", "Hero"]
+      },
+      {
+        title: "Jujutsu Kaisen",
+        subtitle: "Anime Series",
+        image: "https://images.unsplash.com/photo-1613376023733-0a73315d9b06?q=80&w=2670&auto=format&fit=crop",
+        link: "https://www.crunchyroll.com/series/GRDV0019R/jujutsu-kaisen",
+        tags: ["Supernatural", "Action", "Shounen"]
+      },
+      {
+        title: "Arcane Season 2",
+        subtitle: "Netflix Series",
+        image: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=2525&auto=format&fit=crop",
+        link: "https://www.netflix.com/title/81435684",
+        tags: ["Sci-Fi", "Animation", "Masterpiece"]
+      }
+    ]
   }
 ];
 // Export the data

@@ -3,49 +3,10 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { liveStatus } from '../data';
 import { ExternalLink } from 'lucide-react';
+import Carousel from 'react-spring-3d-carousel';
+import { config } from 'react-spring';
 
-const LiveStatus = () => {
-    const [activeTabId, setActiveTabId] = useState(liveStatus[0].id);
-    const [statusData, setStatusData] = useState(liveStatus);
-    const activeItem = statusData.find(item => item.id === activeTabId) || statusData[0];
-
-    // Fetch Steam Data
-    useEffect(() => {
-        const fetchSteamData = async () => {
-            try {
-                // In development (vite), api/ is not served. This will fail gracefully.
-                // In production (Vercel), this will work.
-                const res = await fetch('/api/steam');
-                if (!res.ok) return;
-
-                const data = await res.json();
-
-                if (data.isPlaying && data.game) {
-                    setStatusData(prev => prev.map(item => {
-                        if (item.id === 'gaming') {
-                            return {
-                                ...item,
-                                title: data.game.name,
-                                subtitle: "Currently Playing",
-                                image: data.game.image || item.image, // Fallback to default if no image
-                                link: data.game.link,
-                                tags: ["Steam", "Live Status", "PC"]
-                            };
-                        }
-                        return item;
-                    }));
-                }
-            } catch (error) {
-                console.log("Steam API fetch failed (expected in local dev)", error);
-            }
-        };
-
-        fetchSteamData();
-        // Poll every 5 minutes
-        const interval = setInterval(fetchSteamData, 5 * 60 * 1000);
-        return () => clearInterval(interval);
-    }, []);
-
+const TiltCard = ({ item, isActive }: { item: any, isActive: boolean }) => {
     // 3D Tilt Logic
     const x = useMotionValue(0);
     const y = useMotionValue(0);
@@ -53,10 +14,11 @@ const LiveStatus = () => {
     const mouseX = useSpring(x, { stiffness: 500, damping: 100 });
     const mouseY = useSpring(y, { stiffness: 500, damping: 100 });
 
-    const rotateX = useTransform(mouseY, [-0.5, 0.5], ["17.5deg", "-17.5deg"]);
-    const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-17.5deg", "17.5deg"]);
+    const rotateX = useTransform(mouseY, [-0.5, 0.5], ["25deg", "-25deg"]);
+    const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-25deg", "25deg"]);
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!isActive) return;
         const rect = e.currentTarget.getBoundingClientRect();
         const width = rect.width;
         const height = rect.height;
@@ -73,12 +35,166 @@ const LiveStatus = () => {
     };
 
     return (
+        <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: isActive ? 1 : 0.5, scale: isActive ? 1 : 0.9 }}
+            transition={{ duration: 0.4 }}
+            style={{
+                rotateX: isActive ? rotateX : 0,
+                rotateY: isActive ? rotateY : 0,
+                transformStyle: "preserve-3d",
+            }}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            className={`relative w-[400px] md:w-[700px] aspect-video md:aspect-[2/1] group ${isActive ? 'cursor-pointer' : 'cursor-default pointer-events-none'}`}
+        >
+            {/* Outer Glow - Behind the card from all 4 corners */}
+            <div
+                className={`absolute -inset-3 rounded-[2rem] blur-2xl transition-all duration-500 will-change-transform opacity-0 ${isActive ? 'group-hover:opacity-60' : ''} ${item.color.includes('emerald') ? 'bg-emerald-500' :
+                        item.color.includes('blue') ? 'bg-blue-500' :
+                            item.color.includes('purple') ? 'bg-purple-500' : 'bg-emerald-500'
+                    }`}
+                style={{ transform: 'translateZ(-20px)' }}
+            />
+
+            {/* Card Content */}
+            <div className={`relative h-full w-full rounded-3xl bg-gray-900 border border-gray-800 shadow-2xl overflow-hidden isolate [-webkit-mask-image:radial-gradient(white,black)] transition-all duration-500 ${!isActive ? 'opacity-50' : ''}`}>
+                {/* Background Image */}
+                <div className="absolute inset-0">
+                    <img
+                        src={item.image}
+                        alt={item.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-900/60 to-transparent" />
+                </div>
+
+                {/* Content Overlay */}
+                <div className="absolute inset-x-0 bottom-0 p-6 md:p-10 flex flex-col justify-end items-start text-left transform-style-3d translate-z-10">
+
+                    {/* Tags */}
+                    {item.tags && (
+                        <div className="flex flex-wrap gap-2 mb-4">
+                            {item.tags.map((tag: string, i: number) => (
+                                <span key={i} className="px-3 py-1 bg-white/10 backdrop-blur-md border border-white/10 rounded-lg text-xs font-medium text-white/90">
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
+                    )}
+
+                    <div className="space-y-1 mb-6">
+                        <span className={`text-xs md:text-sm font-bold tracking-wider uppercase ${item.color || 'text-gray-400'}`}>
+                            {item.subtitle}
+                        </span>
+                        <h3 className="text-2xl md:text-4xl font-bold text-white">
+                            {item.title}
+                        </h3>
+                    </div>
+
+                    {/* Action Link */}
+                    {item.link && (
+                        <motion.a
+                            href={item.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-gray-950 rounded-xl font-semibold text-sm hover:bg-gray-100 transition-colors"
+                        >
+                            View Details
+                            <ExternalLink className="w-4 h-4" />
+                        </motion.a>
+                    )}
+                </div>
+
+                {/* Shine Effect */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+            </div>
+        </motion.div>
+    )
+}
+
+const LiveStatus = () => {
+    const [activeTabId, setActiveTabId] = useState(liveStatus[0].id);
+    const [statusData, setStatusData] = useState(liveStatus);
+    const [carouselState, setCarouselState] = useState({
+        goToSlide: 0,
+        offsetRadius: 2,
+        showNavigation: false, // We use custom nav or click-to-slide
+        config: config.gentle
+    });
+
+    const activeItem = statusData.find(item => item.id === activeTabId) || statusData[0];
+
+    // Get color for background glow
+    const glowColor = activeItem.color ? activeItem.color.replace('text-', 'bg-').replace('400', '500') : 'bg-blue-500';
+
+    // Fetch Steam Data (Same logic as before)
+    useEffect(() => {
+        const fetchSteamData = async () => {
+            try {
+                const res = await fetch('/api/steam');
+                if (!res.ok) return;
+                const data = await res.json();
+
+                if (data.isPlaying && data.game) {
+                    setStatusData(prev => prev.map(item => {
+                        if (item.id === 'gaming') {
+                            return {
+                                ...item,
+                                title: data.game.name,
+                                subtitle: "Currently Playing",
+                                image: data.game.image || item.image,
+                                link: data.game.link,
+                                tags: ["Steam", "Live Status", "PC"]
+                            };
+                        }
+                        return item;
+                    }));
+                }
+            } catch (error) {
+                // Silently fail in dev
+            }
+        };
+        fetchSteamData();
+        const interval = setInterval(fetchSteamData, 5 * 60 * 1000);
+        return () => clearInterval(interval);
+    }, []);
+
+    // Prepare slides for react-spring-3d-carousel
+    const itemsToShow = activeItem.subItems && activeItem.subItems.length > 0 ? activeItem.subItems : [activeItem];
+
+    // We need to maintain stable keys strictly, so we'll wrap this in a way that key depends on index/id
+    const slides = itemsToShow.map((item: any, index: number) => {
+        const isActive = index === carouselState.goToSlide;
+        return {
+            key: `${activeTabId}-${index}`, // Stable key based on tab and index
+            content: (
+                <div onClick={() => setCarouselState({ ...carouselState, goToSlide: index })}>
+                    <TiltCard
+                        item={{ ...item, color: item.color || activeItem.color }}
+                        isActive={isActive}
+                    />
+                </div>
+            ),
+            onClick: () => setCarouselState({ ...carouselState, goToSlide: index })
+        };
+    });
+
+    // Reset slide index when tab changes
+    useEffect(() => {
+        setCarouselState(prev => ({ ...prev, goToSlide: 0 }));
+    }, [activeTabId]);
+
+
+    return (
         <section className="relative py-20 px-4 overflow-hidden">
 
             {/* Background Decor */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-500/10 blur-[120px] rounded-full pointer-events-none" />
+            <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] ${glowColor}/10 blur-[120px] rounded-full pointer-events-none transition-colors duration-700`} />
 
-            <div className="relative max-w-4xl mx-auto space-y-12">
+            <div className="relative max-w-6xl mx-auto space-y-12">
 
                 {/* Header Section */}
                 <div className="flex flex-col items-center space-y-4 text-center">
@@ -131,81 +247,30 @@ const LiveStatus = () => {
                     </div>
                 </div>
 
-                {/* 3D Content Card */}
-                <div className="perspective-1000 flex justify-center">
+                {/* Content Area */}
+                <div className="flex justify-center min-h-[500px]">
                     <AnimatePresence mode="wait">
                         <motion.div
-                            key={activeItem.id}
-                            initial={{ opacity: 0, rotateX: 20, scale: 0.9 }}
-                            animate={{ opacity: 1, rotateX: 0, scale: 1 }}
-                            exit={{ opacity: 0, rotateX: -20, scale: 0.9 }}
-                            transition={{ duration: 0.4 }}
-                            style={{
-                                rotateX,
-                                rotateY,
-                                transformStyle: "preserve-3d",
-                            }}
-                            onMouseMove={handleMouseMove}
-                            onMouseLeave={handleMouseLeave}
-                            className="relative w-full max-w-2xl aspect-video md:aspect-[2/1] group cursor-pointer"
+                            key={activeTabId}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.3 }}
+                            className="w-full h-[500px] relative" // Fixed height for carousel
                         >
-                            {/* Outer Glow - Behind the card */}
-                            <div
-                                className="absolute -inset-4 bg-emerald-500/30 rounded-[2rem] blur-xl opacity-0 group-hover:opacity-100 transition duration-500 group-hover:duration-200 will-change-transform"
-                                style={{ transform: 'translateZ(-10px)' }}
-                            />
-
-                            {/* Card Content - Clipped */}
-                            <div className="relative h-full w-full rounded-3xl bg-gray-900 border border-gray-800 shadow-2xl overflow-hidden isolate [-webkit-mask-image:radial-gradient(white,black)]">
-                                {/* Background Image */}
-                                <div className="absolute inset-0">
-                                    <img
-                                        src={activeItem.image}
-                                        alt={activeItem.title}
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-900/60 to-transparent" />
+                            {itemsToShow.length > 1 ? (
+                                <Carousel
+                                    slides={slides}
+                                    goToSlide={carouselState.goToSlide}
+                                    offsetRadius={carouselState.offsetRadius}
+                                    showNavigation={carouselState.showNavigation}
+                                    animationConfig={carouselState.config}
+                                />
+                            ) : (
+                                <div className="flex justify-center items-center h-full">
+                                    <TiltCard item={activeItem} isActive={true} />
                                 </div>
-
-                                {/* Content Overlay */}
-                                <div className="absolute inset-x-0 bottom-0 p-6 md:p-10 flex flex-col justify-end items-start text-left transform-style-3d translate-z-10">
-
-                                    {/* Tags */}
-                                    <div className="flex flex-wrap gap-2 mb-4">
-                                        {activeItem.tags.map((tag, i) => (
-                                            <span key={i} className="px-3 py-1 bg-white/10 backdrop-blur-md border border-white/10 rounded-lg text-xs font-medium text-white/90">
-                                                {tag}
-                                            </span>
-                                        ))}
-                                    </div>
-
-                                    <div className="space-y-1 mb-6">
-                                        <span className={`text-xs md:text-sm font-bold tracking-wider uppercase ${activeItem.color}`}>
-                                            {activeItem.subtitle}
-                                        </span>
-                                        <h3 className="text-2xl md:text-4xl font-bold text-white">
-                                            {activeItem.title}
-                                        </h3>
-                                    </div>
-
-                                    {/* Action Link */}
-                                    <motion.a
-                                        href={activeItem.link}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        whileHover={{ scale: 1.05 }}
-                                        whileTap={{ scale: 0.95 }}
-                                        className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-gray-950 rounded-xl font-semibold text-sm hover:bg-gray-100 transition-colors"
-                                    >
-                                        View Details
-                                        <ExternalLink className="w-4 h-4" />
-                                    </motion.a>
-                                </div>
-
-                                {/* Shine Effect */}
-                                <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                            </div>
-
+                            )}
                         </motion.div>
                     </AnimatePresence>
                 </div>

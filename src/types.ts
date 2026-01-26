@@ -64,6 +64,16 @@ interface LiveStatusItem {
   icon: LucideIcon;
   color: string;
   tags: string[];
+  subItems?: LiveStatusContent[]; // Support for multiple items (e.g., Watching list)
 }
 
-export type { NavItem, Certification, SkillCategory, Skill, SkillGrade, Experience, Project, LiveStatusItem };
+interface LiveStatusContent {
+  title: string;
+  subtitle?: string;
+  image: string;
+  link?: string;
+  tags: string[];
+  id?: string; // Optional ID for internal tracking if needed
+}
+
+export type { NavItem, Certification, SkillCategory, Skill, SkillGrade, Experience, Project, LiveStatusItem, LiveStatusContent };
