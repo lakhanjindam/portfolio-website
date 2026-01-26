@@ -7,11 +7,11 @@ interface TimelineDotProps {
   isEven: boolean;
 }
 
-const TimelineDot: React.FC<TimelineDotProps> = ({ progress, index, isEven }) => {
+const TimelineDot: React.FC<TimelineDotProps> = ({ progress, isEven }) => {
   const scale = useTransform(progress, [0, 0.5], [0.7, 1]);
   const opacity = useTransform(progress, [0, 0.5], [0.7, 1]);
   const isActive = useTransform(progress, [0.2, 0.3], [0, 1]);
-  
+
   return (
     <div className="flex items-center z-10">
       <motion.div
@@ -30,7 +30,7 @@ const TimelineDot: React.FC<TimelineDotProps> = ({ progress, index, isEven }) =>
           transition={{ duration: 2, repeat: Infinity }}
         />
       </motion.div>
-      
+
       {/* Only show connecting lines on desktop */}
       {!isEven && (
         <motion.div
@@ -42,7 +42,7 @@ const TimelineDot: React.FC<TimelineDotProps> = ({ progress, index, isEven }) =>
           className="hidden sm:block h-[2px] w-[50px] bg-gradient-to-r from-emerald-400 to-transparent"
         />
       )}
-      
+
       {isEven && (
         <motion.div
           style={{

@@ -1,12 +1,12 @@
 // import Image from 'next/image'
 import { Card, CardContent } from "../ui/card"
 import { CalendarIcon } from 'lucide-react'
-import { FaAws} from 'react-icons/fa';
+import { FaAws } from 'react-icons/fa';
 import { SiKubernetes, SiTerraform } from 'react-icons/si';
 import { VscAzure } from 'react-icons/vsc';
 
 interface CertificateCardProps {
-  id : string
+  id: string
   iconColor?: string
   title: string
   organization: string
@@ -26,10 +26,10 @@ export function CertificateCard({ id, title, organization, issueDate, expiryDate
         <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-emerald-500/80 to-blue-500/20 opacity-0 group-hover:opacity-60 transition-opacity duration-500 ease-in-out" />
         <div className="absolute inset-0 bg-white animate-shine opacity-40 group-hover:opacity-0 transition-opacity duration-500 ease-in-out" />
         <div className="logo-container absolute inset-0 flex items-center justify-center transition-all duration-500 ease-in-out group-hover:opacity-0 group-hover:scale-0">
-          {id.includes('k8s') && <SiKubernetes size={100} color={iconColor}/>}
-          {id.includes('aws') && <FaAws size={100} color={iconColor}/>}
-          {id.includes('azure') && <VscAzure size={100} color={iconColor}/>}
-          {id.includes('terraform') && <SiTerraform size={100} color={iconColor}/>}
+          {id.includes('k8s') && <SiKubernetes size={100} color={iconColor} />}
+          {id.includes('aws') && <FaAws size={100} color={iconColor} />}
+          {id.includes('azure') && <VscAzure size={100} color={iconColor} />}
+          {id.includes('terraform') && <SiTerraform size={100} color={iconColor} />}
         </div>
       </div>
       <CardContent className="absolute inset-0 p-6 flex flex-col justify-between text-white">
@@ -96,4 +96,3 @@ export function CertificateCard({ id, title, organization, issueDate, expiryDate
     </Card>
   )
 }
-

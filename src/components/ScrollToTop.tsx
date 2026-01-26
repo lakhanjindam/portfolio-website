@@ -1,16 +1,16 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { motion, useAnimation } from "framer-motion"
 import { ArrowUp } from 'lucide-react'
 
 export default function ScrollToTop() {
   const [scrollProgress, setScrollProgress] = useState(0)
   const [isVisible, setIsVisible] = useState(true)
-  let timer: number;
+  const timerRef = useRef<number | undefined>(undefined);
   const controls = useAnimation()
-  
-  
+
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScroll = window.scrollY
@@ -18,10 +18,10 @@ export default function ScrollToTop() {
       const progress = Math.min(currentScroll / totalScroll, 1)
       setScrollProgress(progress)
       setIsVisible(true);
-      if (timer) {
-        clearTimeout(timer);
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
       }
-      timer = setTimeout(() => {
+      timerRef.current = window.setTimeout(() => {
         setIsVisible(false);
       }, 5000);
     }
@@ -32,8 +32,8 @@ export default function ScrollToTop() {
 
     return () => {
       window.removeEventListener("scroll", handleScroll)
-      if (timer) {
-        clearTimeout(timer);
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
       }
     }
   }, [])

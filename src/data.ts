@@ -12,7 +12,8 @@ import {
   GitBranchIcon,
   Globe,
 } from 'lucide-react';
-import { Certification, SkillCategory, NavItem, Experience, Project } from './types';
+import { Certification, SkillCategory, NavItem, Experience, Project, LiveStatusItem } from './types';
+import { Gamepad2, Tv, BookOpen } from 'lucide-react';
 
 const currentCompany = 'Twilio';
 
@@ -20,96 +21,96 @@ const heroSectionDescription = `My curiosity always drives me to tinker with com
 
 // Sample data
 const experiences: Experience[] = [
-    {
-        duration: 'July 2025 - Present',
-        title: 'Senior Software Engineer',
-        company: 'Talkdesk',
-        description: `Currently working as a Senior Software Engineer at Talkdesk.`,
-        companyURL: 'https://www.talkdesk.com/'
-      },
-    {
-        duration: 'May 2022 - July 2025',
-        title: 'Senior Software Engineer',
-        company: 'Twilio',
-        description: `Developing cloud-native communication platforms using Golang and Kubernetes, focusing on reliability and scalable solutions.`,
-        companyURL: 'https://www.twilio.com/'
-      },
-      {
-        duration: 'Aug 2020 - Apr 2022',
-        title: 'Software Engineer',
-        company: 'BrowserStack',
-        description: `Built, developed and managed Speedlab application and infrastructure.`,
-        companyURL: 'https://www.browserstack.com/'
-      },
-      // {
-      //   duration: 'July 2016 - July 2020',
-      //   title: 'Graduate Student',
-      //   company: 'Xavier Institute of Engineering',
-      //   description: `Completed my Bachelor's degree in Information Technology.`,
-      //   companyURL: 'https://www.xavier.ac.in/'
-      // },
-      // {
-      //   duration: 'May 2014 - May 2016',
-      //   title: 'High School',
-      //   company: 'KJ Somaiya College of Science & Commerce',
-      //   description: `Completed my high school education in Science and Commerce.`,
-      //   companyURL: 'https://kjssc.somaiya.edu.in/en'
-      // }
+  {
+    duration: 'July 2025 - Present',
+    title: 'Senior Software Engineer',
+    company: 'Talkdesk',
+    description: `Currently working as a Senior Software Engineer at Talkdesk.`,
+    companyURL: 'https://www.talkdesk.com/'
+  },
+  {
+    duration: 'May 2022 - July 2025',
+    title: 'Senior Software Engineer',
+    company: 'Twilio',
+    description: `Developing cloud-native communication platforms using Golang and Kubernetes, focusing on reliability and scalable solutions.`,
+    companyURL: 'https://www.twilio.com/'
+  },
+  {
+    duration: 'Aug 2020 - Apr 2022',
+    title: 'Software Engineer',
+    company: 'BrowserStack',
+    description: `Built, developed and managed Speedlab application and infrastructure.`,
+    companyURL: 'https://www.browserstack.com/'
+  },
+  // {
+  //   duration: 'July 2016 - July 2020',
+  //   title: 'Graduate Student',
+  //   company: 'Xavier Institute of Engineering',
+  //   description: `Completed my Bachelor's degree in Information Technology.`,
+  //   companyURL: 'https://www.xavier.ac.in/'
+  // },
+  // {
+  //   duration: 'May 2014 - May 2016',
+  //   title: 'High School',
+  //   company: 'KJ Somaiya College of Science & Commerce',
+  //   description: `Completed my high school education in Science and Commerce.`,
+  //   companyURL: 'https://kjssc.somaiya.edu.in/en'
+  // }
 ];
 
 // NOTE: not used currently
 const projects: Project[] = [
-    {
-        title: 'Scalable Microservices Architecture',
-        description: 'Designed and implemented a high-performance microservices system handling 1M+ daily requests',
-        tech: ['Node.js', 'Docker', 'Kubernetes', 'MongoDB'],
-        github: '#',
-        live: '#'
-      },
-      {
-        title: 'Real-time Data Processing Pipeline',
-        description: 'Built a robust data pipeline processing 500GB+ daily with fault tolerance and monitoring',
-        tech: ['Python', 'Apache Kafka', 'ELK Stack', 'AWS'],
-        github: '#',
-        live: '#'
-      },
-      {
-        title: 'Authentication Service',
-        description: 'Developed a secure authentication system with OAuth2.0 and JWT implementation',
-        tech: ['Java', 'Spring Boot', 'PostgreSQL', 'Redis'],
-        github: '#',
-        live: '#'
-      }
+  {
+    title: 'Scalable Microservices Architecture',
+    description: 'Designed and implemented a high-performance microservices system handling 1M+ daily requests',
+    tech: ['Node.js', 'Docker', 'Kubernetes', 'MongoDB'],
+    github: '#',
+    live: '#'
+  },
+  {
+    title: 'Real-time Data Processing Pipeline',
+    description: 'Built a robust data pipeline processing 500GB+ daily with fault tolerance and monitoring',
+    tech: ['Python', 'Apache Kafka', 'ELK Stack', 'AWS'],
+    github: '#',
+    live: '#'
+  },
+  {
+    title: 'Authentication Service',
+    description: 'Developed a secure authentication system with OAuth2.0 and JWT implementation',
+    tech: ['Java', 'Spring Boot', 'PostgreSQL', 'Redis'],
+    github: '#',
+    live: '#'
+  }
 ];
 
 const heroSectionSkills = [
-    { color: 'emerald-400', name: 'Microservices Architecture' },
-    { color: 'blue-400', name: 'Cloud Infrastructure' },
-    { color: 'purple-400', name: 'System Design' },
-  ];
+  { color: 'emerald-400', name: 'Microservices Architecture' },
+  { color: 'blue-400', name: 'Cloud Infrastructure' },
+  { color: 'purple-400', name: 'System Design' },
+];
 
 
 const skillsData: SkillCategory[] = [
   {
-      icon: Code,
-      title: 'Programming Languages',
-      skills: [
+    icon: Code,
+    title: 'Programming Languages',
+    skills: [
       { name: 'Golang', grade: 'A' },
       { name: 'Python', grade: 'A' },
       { name: 'Shell Scripting', grade: 'A' },
       { name: 'Ruby', grade: 'B' },
       { name: 'Javascript', grade: 'B' },
-      ],
+    ],
   },
   {
-      icon: Database,
-      title: 'Databases',
-      skills: [
+    icon: Database,
+    title: 'Databases',
+    skills: [
       { name: 'PostgreSQL', grade: 'A' },
       { name: 'MySQL', grade: 'A' },
       { name: 'MongoDB', grade: 'B' },
       { name: 'Redis', grade: 'B' },
-      ],
+    ],
   },
   {
     icon: Globe,
@@ -124,44 +125,44 @@ const skillsData: SkillCategory[] = [
     ],
   },
   {
-      icon: Cloud,
-      title: 'Cloud & Infra',
-      skills: [
-        { name: 'Docker', grade: 'A' },
-        { name: 'Kubernetes', grade: 'A' },
-        { name: 'ArgoCD', grade: 'A' },
-        { name: 'AWS', grade: 'B' },
+    icon: Cloud,
+    title: 'Cloud & Infra',
+    skills: [
+      { name: 'Docker', grade: 'A' },
+      { name: 'Kubernetes', grade: 'A' },
+      { name: 'ArgoCD', grade: 'A' },
+      { name: 'AWS', grade: 'B' },
       { name: 'Terraform', grade: 'B' },
       { name: 'Helm', grade: 'B' },
-      ],
+    ],
   },
   {
-      icon: Search,
-      title: 'Observability & Incident Management',
-      skills: [
+    icon: Search,
+    title: 'Observability & Incident Management',
+    skills: [
       { name: 'Datadog', grade: 'A' },
       { name: 'Prometheus', grade: 'B' },
       { name: 'Grafana', grade: 'B' },
       { name: 'PagerDuty', grade: 'B' },
       { name: 'FireHydrant', grade: 'B' },
-      ],
+    ],
   },
   {
-      icon: GitBranchIcon,
-      title: 'CI/CD & Version Control',
-      skills: [
+    icon: GitBranchIcon,
+    title: 'CI/CD & Version Control',
+    skills: [
       { name: 'Git', grade: 'A' },
       { name: 'Github', grade: 'A' },
       { name: 'Buildkite', grade: 'A' },
       { name: 'Jenkins', grade: 'B' },
       { name: 'Github Actions', grade: 'C' },
 
-      ],
+    ],
   },
   {
-      icon: Wrench,
-      title: 'Tools & Practices',
-      skills: [
+    icon: Wrench,
+    title: 'Tools & Practices',
+    skills: [
       { name: 'Slack', grade: 'A' },
       { name: 'GitOps', grade: 'A' },
       { name: 'Temporal.io', grade: 'A' },
@@ -169,9 +170,9 @@ const skillsData: SkillCategory[] = [
       { name: 'Kanban', grade: 'A' },
       { name: 'Test Driven Development', grade: 'A' },
       { name: 'Behavior Driven Development', grade: 'B' },
-      ],
+    ],
   },
-  ];
+];
 
 const certifications: Certification[] = [
   {
@@ -180,13 +181,13 @@ const certifications: Certification[] = [
     issuer: 'CNCF',
     description: 'Earners of this designation have proven proficiency in managing Kubernetes clusters, including application lifecycle, installation, configuration, networking, scheduling, security, maintenance, monitoring, storage, and troubleshooting.',
     issueDate: '2024-08',
-    expiryDate: '2027-08',  
+    expiryDate: '2027-08',
     credentialId: 'LF-u23yc6zyq5',
     credentialUrl: 'https://www.credly.com/badges/552a217c-f1eb-4878-8675-0ccd4dbf4b97/public_url',
     logo: 'https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?auto=format&fit=crop&w=200&h=200',
     featured: true,
     iconColor: '#326CE5',
-    skills: ['Kubernetes', 'Containers', 'Pods', 'Deployment', 'Services', 'Network', 'Storage', 'Security', 'Monitoring', 'Configuration', 'Ingress', 'Helm', 'Troubleshooting', 'SRE', 'Sys admin', ]
+    skills: ['Kubernetes', 'Containers', 'Pods', 'Deployment', 'Services', 'Network', 'Storage', 'Security', 'Monitoring', 'Configuration', 'Ingress', 'Helm', 'Troubleshooting', 'SRE', 'Sys admin',]
   },
   {
     id: 'k8s-ckad',
@@ -218,12 +219,48 @@ const certifications: Certification[] = [
   }
 ];
 
-const navItems: NavItem[] = [ 
+const navItems: NavItem[] = [
   { name: 'Home', href: '#home', icon: User },
   { name: 'Experience', href: '#experience', icon: Briefcase },
   { name: 'Skills', href: '#skills', icon: Star },
   { name: 'Certifications', href: '#certifications', icon: Medal },
   { name: 'Contact', href: '#contact', icon: Mail },
 ]
+
+const liveStatus: LiveStatusItem[] = [
+  {
+    id: "gaming",
+    tabLabel: "Gaming",
+    title: "Hogwarts Legacy",
+    subtitle: "Action RPG",
+    image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/990080/library_hero.jpg",
+    link: "https://store.steampowered.com/app/990080/Hogwarts_Legacy/",
+    icon: Gamepad2,
+    color: "text-emerald-400",
+    tags: ["Steam", "Open World", "Magic"]
+  },
+  {
+    id: "learning",
+    tabLabel: "Learning",
+    title: "System Design & AI Agents",
+    subtitle: "Advanced Concepts",
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2670&auto=format&fit=crop", // placeholder: tech/cyber
+    link: "https://github.com/lakhanjindam",
+    icon: BookOpen,
+    color: "text-blue-400",
+    tags: ["Architecture", "Scalability", "LLMs"]
+  },
+  {
+    id: "watching",
+    tabLabel: "Watching",
+    title: "Arcane Season 2",
+    subtitle: "Netflix Series",
+    image: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=2525&auto=format&fit=crop", // placeholder: cinematic/neon
+    link: "https://www.netflix.com/title/81435684",
+    icon: Tv,
+    color: "text-purple-400",
+    tags: ["Sci-Fi", "Animation", "Masterpiece"]
+  }
+];
 // Export the data
-export { experiences, projects, currentCompany, heroSectionDescription, heroSectionSkills, certifications, skillsData, navItems};
+export { experiences, projects, currentCompany, heroSectionDescription, heroSectionSkills, certifications, skillsData, navItems, liveStatus };

@@ -7,12 +7,14 @@ import Skills from './components/Skills';
 import ScrollToTop from './components/ScrollToTop';
 import { Analytics } from "@vercel/analytics/react"
 import Footer from './components/footer';
+import LiveStatus from './components/LiveStatus';
 
 const App: React.FC = () => {
   return (
     <div className="bg-gray-900">
       <Analytics />
       <Hero />
+      <LiveStatus />
       <Timeline />
       <Skills />
       <Certifications />

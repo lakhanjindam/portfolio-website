@@ -14,18 +14,18 @@ interface SkillCategory {
 }
 
 interface Certification {
-    id: string;
-    name: string;
-    issuer: string;
-    issueDate: string;
-    expiryDate?: string;
-    credentialId: string;
-    credentialUrl: string;
-    logo: string;
-    featured?: boolean;
-    iconColor?: string;
-    description?: string;
-    skills: string[]
+  id: string;
+  name: string;
+  issuer: string;
+  issueDate: string;
+  expiryDate?: string;
+  credentialId: string;
+  credentialUrl: string;
+  logo: string;
+  featured?: boolean;
+  iconColor?: string;
+  description?: string;
+  skills: string[]
 }
 
 
@@ -53,4 +53,17 @@ interface Project {
   live: string;
 }
 
-export type { NavItem, Certification, SkillCategory, Skill, SkillGrade, Experience, Project };
+interface LiveStatusItem {
+  id: string;
+  tabLabel: string;
+  title: string;
+  subtitle?: string;
+  value?: string; // keep optional for backward compat if needed, or remove if unused. Let's keep strict new structure.
+  image: string;
+  link?: string;
+  icon: LucideIcon;
+  color: string;
+  tags: string[];
+}
+
+export type { NavItem, Certification, SkillCategory, Skill, SkillGrade, Experience, Project, LiveStatusItem };

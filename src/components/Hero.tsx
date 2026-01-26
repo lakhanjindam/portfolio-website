@@ -1,5 +1,5 @@
-import {  ArrowRight, Github, Linkedin } from 'lucide-react';
-import { BorderAnimation } from './BorderAnimation';
+import { ArrowRight, Github, Linkedin } from 'lucide-react';
+
 import { Button } from './ui/Button';
 import { heroSectionDescription } from '../data';
 import './Hero.css'; // Import the CSS file for animations
@@ -16,7 +16,7 @@ import {
 import { Stars } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { TextShimmer } from './ui/text-shimmer';
-import { GlassButton } from './ui/GlassButton';
+
 
 const socialLinks = [
   { href: "https://github.com/lakhanjindam", icon: Github, label: "GitHub", color: 'emerald' },
@@ -35,7 +35,7 @@ const Hero = () => {
       repeat: Infinity,
       repeatType: "mirror",
     });
-  }, []);
+  }, [color]);
 
   const backgroundImage = useMotionTemplate`radial-gradient(125% 125% at 50% 0%, #020617 50%, ${color})`;
 
@@ -46,9 +46,9 @@ const Hero = () => {
       <FloatingNavBar />
       {/* NOTE: disabled for now
        <TerminalWindow /> 
-       */}  
+       */}
       {/* <BorderAnimation /> */}
-      
+
       <div className="relative z-10 max-w-6xl mx-auto w-full px-2 sm:px-4 lg:px-8">
         <div className="pt-16 lg:pt-0 grid lg:grid-cols-2 gap-6 lg:gap-12 items-center">
           <motion.div
@@ -67,7 +67,7 @@ const Hero = () => {
                 className="font-grotesk text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-blue-500"
                 initial={{ opacity: 1, scale: 1 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1}}
+                transition={{ duration: 1 }}
                 style={{ fontFamily: 'Playfair Display, serif' }}
               >
                 <TextShimmer
@@ -77,11 +77,11 @@ const Hero = () => {
                   Lakhan Jindam
                 </TextShimmer>
               </motion.h1>
-              
+
               <p>
                 <CreativeTextAnimation />
               </p>
-              
+
               <p className="text-lg sm:text-xl text-gray-400 max-w-lg mx-auto lg:mx-0 cool-italic">
                 {heroSectionDescription}
               </p>
@@ -112,7 +112,7 @@ const Hero = () => {
                 <a key={href} href={href} className={`inline-flex items-center justify-center w-10 h-10 hover:text-${color}-400 rounded-full bg-gray-800 bg-opacity-50 hover:bg-opacity-100 transition-colors`} aria-label={label}>
                   <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
                 </a>
-              ))}            
+              ))}
             </motion.div>
           </motion.div>
 
@@ -129,7 +129,7 @@ const Hero = () => {
               autoplay
             />
           </motion.div>
-          
+
         </div>
       </div>
       <div className="absolute inset-0 z-0">
