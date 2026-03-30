@@ -1,0 +1,227 @@
+name: Maintain agents.md
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/components/**"
+      - "api/**"
+      - "package.json"
+  schedule:
+    # Run every Monday at 06:00 UTC to catch any drift
+    - cron: "0 6 * * 1"
+  workflow_dispatch: # Allow manual runs
+
+permissions:
+  contents: write
+
+jobs:
+  update-agents-md:
+    name: Regenerate agents.md sections
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      # ------------------------------------------------------------------ #
+      # 1. Regenerate the Components table
+      # ------------------------------------------------------------------ #
+      - name: Generate Components table
+        id: components
+        run: |
+          TABLE="| Path | Description |\n|------|-------------|\n"
+
+          # Map of known descriptions; unknown files get a generic label
+          declare -A DESC=(
+            ["AnimatedBackground"]="Animated canvas/WebGL background"
+            ["BorderAnimation"]="Decorative animated border effect"
+            ["Contact"]="Contact section with form"
+            ["Hero"]="Hero / landing section"
+            ["LiveStatus"]="Real-time availability badge"
+            ["Projects"]="Projects showcase section"
+            ["ScrollToTop"]="Floating scroll-to-top button"
+            ["Skills"]="Skills overview section"
+            ["certificateCard"]="Individual certification card"
+            ["certifications"]="Certifications section"
+            ["creativeTextAnimation"]="Typewriter / creative text effect"
+            ["floatingNavbar"]="Floating navigation bar"
+            ["footer"]="Page footer"
+            ["gradeIcon"]="Skill proficiency icon"
+            ["progressBar"]="Animated skill progress bar"
+            ["skillCategory"]="Skill category group"
+            ["skillItem"]="Individual skill item"
+            ["TerminalLine"]="Single line in terminal UI"
+            ["TerminalWindow"]="Terminal-style card component"
+            ["Timeline"]="Work experience timeline"
+            ["TimelineDot"]="Timeline connector dot"
+            ["TimelineItem"]="Single timeline entry"
+            ["TimelineLine"]="Connecting line between entries"
+            ["browserstackLogo"]="BrowserStack company logo"
+            ["talkdeskLogo"]="Talkdesk company logo"
+            ["twilioLogo"]="Twilio company logo"
+            ["Button"]="Reusable button component"
+            ["HighlightedText"]="Highlighted / accented text span"
+            ["badge"]="Badge / pill component (shadcn)"
+            ["card"]="Card component (shadcn)"
+            ["shineOverlay"]="Shine hover overlay effect"
+            ["text-effect"]="Text reveal animation"
+            ["text-shimmer"]="Shimmer text animation"
+          )
+
+          while IFS= read -r file; do
+            # Strip leading ./
+            rel="${file#./}"
+            # Get base name without extension
+            base=$(basename "$file" .tsx)
+            description="${DESC[$base]:-React component}"
+            TABLE+="| \`${rel}\` | ${description} |\n"
+          done < <(find src/components -name "*.tsx" | sort)
+
+          # Write to a temp file so newlines are preserved
+          printf "%b" "$TABLE" > /tmp/components_table.txt
+          echo "Generated $(wc -l < /tmp/components_table.txt) component rows"
+
+      # ------------------------------------------------------------------ #
+      # 2. Regenerate the API Routes table
+      # ------------------------------------------------------------------ #
+      - name: Generate API Routes table
+        id: api_routes
+        run: |
+          TABLE="| File | Endpoint | Purpose |\n|------|----------|---------|"
+
+          declare -A API_DESC=(
+            ["anime"]="Anime-related data proxy"
+            ["steam"]="Steam profile / gaming data proxy"
+          )
+
+          while IFS= read -r file; do
+            rel="${file#./}"
+            base=$(basename "$file" .ts)
+            desc="${API_DESC[$base]:-Serverless API route}"
+            TABLE+="\n| \`${rel}\` | \`/api/${base}\` | ${desc} |"
+          done < <(find api -name "*.ts" | sort)
+
+          printf "%b" "$TABLE" > /tmp/api_table.txt
+          echo "Generated API routes table"
+
+      # ------------------------------------------------------------------ #
+      # 3. Regenerate the Dependencies table
+      # ------------------------------------------------------------------ #
+      - name: Generate Dependencies table
+        id: dependencies
+        run: |
+          node - << 'EOF'
+          const fs = require('fs');
+          const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+
+          const roles = {
+            'react': 'UI library',
+            'react-dom': 'React DOM renderer',
+            'framer-motion': 'Animations',
+            'tailwindcss': 'Utility-first CSS',
+            'vite': 'Build tool & dev server',
+            'typescript': 'Type safety',
+            '@react-three/fiber': 'React renderer for Three.js',
+            '@react-three/drei': 'Three.js helpers',
+            'lucide-react': 'Icon library',
+            'react-icons': 'Additional icons',
+            'react-intersection-observer': 'Scroll-triggered visibility',
+            'styled-components': 'CSS-in-JS (legacy use)',
+            '@vercel/analytics': 'Analytics',
+          };
+
+          const allDeps = { ...pkg.dependencies, ...pkg.devDependencies };
+
+          let table = '| Package | Version | Role |\n|---------|---------|------|\n';
+          for (const [name, role] of Object.entries(roles)) {
+            const version = allDeps[name] || 'N/A';
+            table += `| \`${name}\` | ${version} | ${role} |\n`;
+          }
+
+          // Append any new deps not in the known list
+          const knownKeys = new Set(Object.keys(roles));
+          for (const [name, version] of Object.entries(pkg.dependencies || {})) {
+            if (!knownKeys.has(name)) {
+              table += `| \`${name}\` | ${version} | — |\n`;
+            }
+          }
+
+          fs.writeFileSync('/tmp/deps_table.txt', table);
+          console.log('Generated dependencies table');
+          EOF
+
+      # ------------------------------------------------------------------ #
+      # 4. Splice the tables back into agents.md
+      # ------------------------------------------------------------------ #
+      - name: Update agents.md
+        run: |
+          node - << 'EOF'
+          const fs = require('fs');
+
+          let content = fs.readFileSync('agents.md', 'utf8');
+
+          function replaceSection(text, startMarker, endMarker, newInner) {
+            const startIdx = text.indexOf(startMarker);
+            const endIdx   = text.indexOf(endMarker);
+            if (startIdx === -1 || endIdx === -1) {
+              console.warn(`Markers not found: ${startMarker}`);
+              return text;
+            }
+            const before = text.slice(0, startIdx + startMarker.length);
+            const after  = text.slice(endIdx);
+            return before + '\n' + newInner.trimEnd() + '\n' + after;
+          }
+
+          const componentsTable = fs.readFileSync('/tmp/components_table.txt', 'utf8');
+          const apiTable        = fs.readFileSync('/tmp/api_table.txt',        'utf8');
+          const depsTable       = fs.readFileSync('/tmp/deps_table.txt',       'utf8');
+
+          content = replaceSection(
+            content,
+            '<!-- COMPONENTS_START -->',
+            '<!-- COMPONENTS_END -->',
+            `## Components\n\n${componentsTable}`
+          );
+
+          content = replaceSection(
+            content,
+            '<!-- API_ROUTES_START -->',
+            '<!-- API_ROUTES_END -->',
+            `## API Routes\n\n${apiTable}`
+          );
+
+          content = replaceSection(
+            content,
+            '<!-- DEPENDENCIES_START -->',
+            '<!-- DEPENDENCIES_END -->',
+            `## Key Dependencies\n\n${depsTable}`
+          );
+
+          fs.writeFileSync('agents.md', content);
+          console.log('agents.md updated successfully');
+          EOF
+
+      # ------------------------------------------------------------------ #
+      # 5. Commit & push if anything changed
+      # ------------------------------------------------------------------ #
+      - name: Commit changes (if any)
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          if git diff --quiet agents.md; then
+            echo "agents.md is already up-to-date — nothing to commit."
+          else
+            git add agents.md
+            git commit -m "chore(agents): auto-update agents.md [skip ci]"
+            git push
+          fi
