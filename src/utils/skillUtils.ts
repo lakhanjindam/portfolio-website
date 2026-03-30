@@ -1,5 +1,6 @@
 import { SkillGrade } from '../types';
 
+// getGradePercentage return percentage based on grade
 export const getGradePercentage = (grade: SkillGrade): number => {
     const gradeMap: Record<SkillGrade, number> = {
       'A': 100,
@@ -9,8 +10,9 @@ export const getGradePercentage = (grade: SkillGrade): number => {
     };
     return gradeMap[grade];
   };
-  
-  export const getGradeColor = (grade: SkillGrade): string => {
+
+// getGradeColor return colors based on grade
+export const getGradeColor = (grade: SkillGrade): string => {
     const colorMap: Record<SkillGrade, string> = {
       'A': 'text-emerald-400',
       'B': 'text-blue-400',
