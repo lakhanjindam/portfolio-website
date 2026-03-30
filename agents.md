@@ -172,4 +172,4 @@ The [maintain-agents.yml](.github/workflows/maintain-agents.yml) workflow keeps 
 - Reading `api/*.ts` and regenerating the **API Routes** table.
 - Parsing `package.json` and regenerating the **Key Dependencies** table.
 
-It runs on every push to `main` that touches `src/`, `api/`, or `package.json`, and also on a weekly schedule. If anything drifts, it opens an auto-commit directly on `main`.
+It runs on every push to `main` that touches `src/components/**`, `api/`, or `package.json`, and also on a weekly schedule. The workflow authenticates with `COPILOT_GITHUB_TOKEN` and calls the **GitHub Models API** (`gpt-4o-mini`) to read actual source files and generate accurate descriptions — no hardcoded lookup tables. If anything drifts, it auto-commits directly on `main`.
