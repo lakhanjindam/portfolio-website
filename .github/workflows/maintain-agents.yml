@@ -1,0 +1,256 @@
+name: Maintain agents.md
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/components/**"
+      - "api/**"
+      - "package.json"
+  schedule:
+    # Run every Monday at 06:00 UTC to catch any drift
+    - cron: "0 6 * * 1"
+  workflow_dispatch: # Allow manual runs
+
+permissions:
+  contents: write
+
+jobs:
+  update-agents-md:
+    name: AI-powered agents.md update
+    runs-on: ubuntu-latest
+    env:
+      COPILOT_API_URL: "https://models.inference.ai.azure.com/chat/completions"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      # ------------------------------------------------------------------ #
+      # Single agentic step: read every source file and ask Copilot to
+      # generate accurate descriptions, then splice them into agents.md
+      # ------------------------------------------------------------------ #
+      - name: Run AI agent to update agents.md
+        env:
+          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+        run: |
+          node - << 'EOF'
+          const fs   = require('fs');
+          const path = require('path');
+
+          // ── helpers ──────────────────────────────────────────────────────
+
+          /** Recursively list files matching an extension under a directory. */
+          function walk(dir, ext) {
+            if (!fs.existsSync(dir)) return [];
+            const results = [];
+            for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+              const full = path.join(dir, entry.name);
+              if (entry.isDirectory()) results.push(...walk(full, ext));
+              else if (entry.isFile() && entry.name.endsWith(ext)) results.push(full);
+            }
+            return results.sort();
+          }
+
+          /** Call the GitHub Models / Copilot API (OpenAI-compatible). */
+          async function callCopilot(systemPrompt, userPrompt) {
+            const res = await fetch(process.env.COPILOT_API_URL, {
+              method: 'POST',
+              headers: {
+                'Authorization': `Bearer ${process.env.COPILOT_GITHUB_TOKEN}`,
+                'Content-Type':  'application/json',
+              },
+              body: JSON.stringify({
+                model: 'gpt-4o-mini',
+                temperature: 0.2,
+                messages: [
+                  { role: 'system', content: systemPrompt },
+                  { role: 'user',   content: userPrompt   },
+                ],
+              }),
+            });
+
+            if (!res.ok) {
+              const text = await res.text();
+              throw new Error(`Copilot API error ${res.status}: ${text}`);
+            }
+
+            const json = await res.json();
+            return json.choices[0].message.content.trim();
+          }
+
+          /** Replace a fenced section inside agents.md. */
+          function replaceSection(content, startMarker, endMarker, newInner) {
+            const startIdx = content.indexOf(startMarker);
+            const endIdx   = content.indexOf(endMarker);
+            if (startIdx === -1 || endIdx === -1) {
+              console.warn(`⚠️  Markers not found: ${startMarker}`);
+              return content;
+            }
+            const before = content.slice(0, startIdx + startMarker.length);
+            const after  = content.slice(endIdx);
+            return before + '\n' + newInner.trimEnd() + '\n' + after;
+          }
+
+          // ── 1. Collect component source files ────────────────────────────
+
+          const componentFiles = walk('src/components', '.tsx');
+          console.log(`Found ${componentFiles.length} component files`);
+
+          // Build a compact digest: "### path\n<first 60 lines of source>"
+          const componentDigest = componentFiles.map(f => {
+            const lines = fs.readFileSync(f, 'utf8').split('\n').slice(0, 60).join('\n');
+            return `### ${f}\n\`\`\`tsx\n${lines}\n\`\`\``;
+          }).join('\n\n');
+
+          // ── 2. Ask Copilot to describe every component ───────────────────
+
+          console.log('Asking Copilot to describe components…');
+          const componentDescriptions = await callCopilot(
+            `You are a technical documentation agent for a React + TypeScript portfolio website.
+Your job is to read component source files and produce a one-line description (≤12 words) for each.
+Reply ONLY with a JSON object where every key is the relative file path (e.g. "src/components/Hero.tsx")
+and the value is the one-line description. No markdown, no extra text.`,
+            `Here are the component files:\n\n${componentDigest}`
+          );
+
+          let descMap;
+          try {
+            descMap = JSON.parse(componentDescriptions);
+          } catch (e) {
+            console.error('Failed to parse Copilot response as JSON:', componentDescriptions);
+            throw e;
+          }
+
+          // Build the markdown table
+          let componentsTable = '| Path | Description |\n|------|-------------|\n';
+          for (const f of componentFiles) {
+            const desc = descMap[f] || descMap[f.replace(/\\/g, '/')] || 'React component';
+            componentsTable += `| \`${f}\` | ${desc} |\n`;
+          }
+
+          // ── 3. Collect API route source files ────────────────────────────
+
+          const apiFiles = walk('api', '.ts');
+          console.log(`Found ${apiFiles.length} API route files`);
+
+          let apiTable = '| File | Endpoint | Purpose |\n|------|----------|---------|\n';
+
+          if (apiFiles.length > 0) {
+            const apiDigest = apiFiles.map(f => {
+              const lines = fs.readFileSync(f, 'utf8').split('\n').slice(0, 40).join('\n');
+              return `### ${f}\n\`\`\`ts\n${lines}\n\`\`\``;
+            }).join('\n\n');
+
+            console.log('Asking Copilot to describe API routes…');
+            const apiDescriptions = await callCopilot(
+              `You are a technical documentation agent for a Next.js / Vercel serverless API.
+Read each route file and produce a one-line purpose description (≤10 words).
+Reply ONLY with a JSON object where every key is the relative file path
+and the value is the one-line purpose. No markdown, no extra text.`,
+              `Here are the API route files:\n\n${apiDigest}`
+            );
+
+            let apiDescMap;
+            try {
+              apiDescMap = JSON.parse(apiDescriptions);
+            } catch (e) {
+              console.error('Failed to parse Copilot API response:', apiDescriptions);
+              throw e;
+            }
+
+            for (const f of apiFiles) {
+              const base = path.basename(f, '.ts');
+              const desc = apiDescMap[f] || apiDescMap[f.replace(/\\/g, '/')] || 'Serverless API route';
+              apiTable += `| \`${f}\` | \`/api/${base}\` | ${desc} |\n`;
+            }
+          }
+
+          // ── 4. Build the dependencies table from package.json ────────────
+
+          const pkg     = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+          const allDeps = { ...pkg.dependencies, ...pkg.devDependencies };
+          const depNames = Object.keys(allDeps);
+
+          console.log(`Asking Copilot to describe ${depNames.length} dependencies…`);
+          const depDescriptions = await callCopilot(
+            `You are a technical documentation agent.
+Given a list of npm package names, provide a concise role description (≤6 words) for each.
+Reply ONLY with a JSON object mapping package name → role description. No markdown, no extra text.`,
+            `Packages: ${JSON.stringify(depNames)}`
+          );
+
+          let depDescMap;
+          try {
+            depDescMap = JSON.parse(depDescriptions);
+          } catch (e) {
+            console.error('Failed to parse Copilot deps response:', depDescriptions);
+            throw e;
+          }
+
+          // Show only production deps + key dev deps in the table
+          const devShow = new Set(['typescript', 'vite', 'eslint', 'tailwindcss', 'autoprefixer', 'postcss']);
+          let depsTable = '| Package | Version | Role |\n|---------|---------|------|\n';
+          for (const [name, version] of Object.entries(pkg.dependencies || {})) {
+            const role = depDescMap[name] || '—';
+            depsTable += `| \`${name}\` | ${version} | ${role} |\n`;
+          }
+          for (const [name, version] of Object.entries(pkg.devDependencies || {})) {
+            if (devShow.has(name)) {
+              const role = depDescMap[name] || '—';
+              depsTable += `| \`${name}\` | ${version} | ${role} |\n`;
+            }
+          }
+
+          // ── 5. Splice back into agents.md ────────────────────────────────
+
+          let agentsMd = fs.readFileSync('agents.md', 'utf8');
+
+          agentsMd = replaceSection(
+            agentsMd,
+            '<!-- COMPONENTS_START -->',
+            '<!-- COMPONENTS_END -->',
+            `## Components\n\n${componentsTable}`
+          );
+
+          agentsMd = replaceSection(
+            agentsMd,
+            '<!-- API_ROUTES_START -->',
+            '<!-- API_ROUTES_END -->',
+            `## API Routes\n\n${apiTable}`
+          );
+
+          agentsMd = replaceSection(
+            agentsMd,
+            '<!-- DEPENDENCIES_START -->',
+            '<!-- DEPENDENCIES_END -->',
+            `## Key Dependencies\n\n${depsTable}`
+          );
+
+          fs.writeFileSync('agents.md', agentsMd);
+          console.log('✅ agents.md updated successfully');
+          EOF
+
+      # ------------------------------------------------------------------ #
+      # Commit & push if anything changed
+      # ------------------------------------------------------------------ #
+      - name: Commit changes (if any)
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          if git diff --quiet agents.md; then
+            echo "agents.md is already up-to-date — nothing to commit."
+          else
+            git add agents.md
+            git commit -m "chore(agents): auto-update agents.md via Copilot [skip ci]"
+            git push
+          fi
