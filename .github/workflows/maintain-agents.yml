@@ -116,9 +116,9 @@ jobs:
           console.log('Asking Copilot to describe components…');
           const componentDescriptions = await callCopilot(
             `You are a technical documentation agent for a React + TypeScript portfolio website.
-Your job is to read component source files and produce a one-line description (≤12 words) for each.
-Reply ONLY with a JSON object where every key is the relative file path (e.g. "src/components/Hero.tsx")
-and the value is the one-line description. No markdown, no extra text.`,
+            Your job is to read component source files and produce a one-line description (≤12 words) for each.
+            Reply ONLY with a JSON object where every key is the relative file path (e.g. "src/components/Hero.tsx")
+            and the value is the one-line description. No markdown, no extra text.`,
             `Here are the component files:\n\n${componentDigest}`
           );
 
@@ -153,9 +153,9 @@ and the value is the one-line description. No markdown, no extra text.`,
             console.log('Asking Copilot to describe API routes…');
             const apiDescriptions = await callCopilot(
               `You are a technical documentation agent for a Next.js / Vercel serverless API.
-Read each route file and produce a one-line purpose description (≤10 words).
-Reply ONLY with a JSON object where every key is the relative file path
-and the value is the one-line purpose. No markdown, no extra text.`,
+              Read each route file and produce a one-line purpose description (≤10 words).
+              Reply ONLY with a JSON object where every key is the relative file path
+              and the value is the one-line purpose. No markdown, no extra text.`,
               `Here are the API route files:\n\n${apiDigest}`
             );
 
@@ -183,8 +183,8 @@ and the value is the one-line purpose. No markdown, no extra text.`,
           console.log(`Asking Copilot to describe ${depNames.length} dependencies…`);
           const depDescriptions = await callCopilot(
             `You are a technical documentation agent.
-Given a list of npm package names, provide a concise role description (≤6 words) for each.
-Reply ONLY with a JSON object mapping package name → role description. No markdown, no extra text.`,
+            Given a list of npm package names, provide a concise role description (≤6 words) for each.
+            Reply ONLY with a JSON object mapping package name → role description. No markdown, no extra text.`,
             `Packages: ${JSON.stringify(depNames)}`
           );
 
